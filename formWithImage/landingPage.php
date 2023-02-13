@@ -1,0 +1,78 @@
+<?php
+session_start();
+
+include('../userInformation.php');
+
+$firstName = $_POST['fname'];
+$lastName = $_POST['lname'];
+
+
+$fileName = $_FILES['image']['name'];
+$filePath = $_FILES['image']['full_path'];
+$type = $_FILES['image']['type'];
+$tempName = $_FILES['image']['tmp_name'];
+$size = $_FILES['image']['size'];
+
+
+function ckeckUserInfo($firstName, $lastName, $user)
+{
+    if (empty($firstName) || empty($lastName)) {
+        $_SESSION['formErrorMsg'] = "field should not be empty.";
+        header('Location:formWithImage.php');
+    } else if (is_numeric($firstName) || is_numeric($lastName)) {
+        $_SESSION['formErrorMsg'] = "field should be alphabet.";
+        header('Location:formWithImage.php');
+    } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
+        $_SESSION['formErrorMsg'] = "field should not be special character.";
+        header('Location:formWithImage.php');
+    } else {
+        $_SESSION['firstName'] = $firstName;
+        $_SESSION['lastName'] = $lastName;
+    }
+}
+
+
+function checkUploadedFile($fileName, $tempName)
+{
+    if (isset($fileName)) {
+        $path = "upload_image/" . $fileName;
+        $_SESSION['uploadedImage'] = $path;
+        move_uploaded_file($tempName, $path);
+    } else {
+        $_SESSION['formErrorMsg'] = "please upload file";
+        header('Location:formWithImage.php');
+    }
+}
+
+checkUploadedFile($fileName, $tempName);
+
+ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP</title>
+</head>
+
+<body>
+    <h1>Hello
+        <?php
+        echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+        ?>
+    </h1>
+    <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
+    <div class="file-name">
+        <?php echo $_SESSION['uploadedImage']; ?>
+
+    </div>
+
+
+</body>
+
+</html>
