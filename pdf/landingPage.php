@@ -35,7 +35,7 @@ function ckeckUserInfo($firstName, $lastName, $user)
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
   }
-  
+  header("Location:makePdf.php");
 }
 
 
@@ -95,7 +95,6 @@ function checkEmail($email)
     ));
 
     $response = curl_exec($curl);
-    echo "good";
 
     curl_close($curl);
     echo $response;

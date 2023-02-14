@@ -28,7 +28,7 @@ session_start();
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="">Docs</a>
+        <a class="nav-link" href="../pdf/compleForm.php">Docs</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../logout/logout.php">logout</a>

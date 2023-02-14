@@ -17,7 +17,7 @@ switch ($_GET['q']) {
     header('Location: ../formWithEmail/formWithEmail.php');
     break;
   case '6':
-    header('Location: ../form/login.php');
+    header('Location: ../pdf/compleForm.php');
     break;
   default:
     $_SESSION['querryError'] = "please provide valid querry 1-6.";
