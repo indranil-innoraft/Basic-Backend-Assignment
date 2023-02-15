@@ -1,8 +1,10 @@
 <?php
 session_start();
 
+
 //include the userInformation.
 include('../userInformation.php');
+
 
 /**
  * @param string $firstName
@@ -30,17 +32,23 @@ function ckeckUserInfo($firstName, $lastName, $user)
     $_SESSION['formErrorMsg'] = "field should not be special character.";
     header('Location:login.php');
   } else {
+    //set the session variable.
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
+    //set data to user object.
     $user->setFirstName($firstName);
     $user->setLastName($lastName);
   }
 }
 
+
+
+
 /**
  * call the method checkUserInfo.
  */
 ckeckUserInfo($firstName, $lastName, $user);
+
 
 ?>
 <!DOCTYPE html>
@@ -50,15 +58,19 @@ ckeckUserInfo($firstName, $lastName, $user);
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHP</title>
+  <title>Assignment-1 Output</title>
+  <link rel="stylesheet" href="../outputScreenStyle.css">
+
 </head>
 
 <body>
+  <div class="info">
   <h1>Hello
     <?php
-    echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+    echo $user->getFirstName() . " " . $user->getlastName();
     ?>
   </h1>
+  </div>
 
 </body>
 

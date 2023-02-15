@@ -14,15 +14,13 @@ $email = $_POST['email'];
 
 
 
-$emailFetch=new Email();
+$emailFetch = new Email();
 
-if($emailFetch->validateEmail($email)===true){
-  $_SESSION['email']=$email;
-}
-else{
+if ($emailFetch->validateEmail($email) === true) {
+  $_SESSION['email'] = $email;
+} else {
   $_SESSION['formErrorMsg'] = "email is not valid.";
   header("Location:formWithEmail.php");
-
 }
 
 $fileName = $_FILES['image']['name'];
@@ -126,28 +124,29 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHP</title>
-  <!-- <link rel="stylesheet" href="../style.css"> -->
+  <title>Assignment-5 Output</title>
+  <link rel="stylesheet" href="../outputScreenStyle.css">
+
 </head>
 
 <body>
-  <h1>Hello
+  <div class="info">
+    <h1>Hello
+      <?php
+      echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+      ?>
+    </h1>
     <?php
-    echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+    echo "<p>Phone no :" . $_SESSION['phone'] . "</p>";
+    echo "<p>Email id :" . $_SESSION['emailId'] . "</p>";
     ?>
-  </h1>
-  <?php
-  echo "phone no :" . $_SESSION['phone'] . "<br>";
-  echo "email id " . $_SESSION['emailId'];
-  ?>
-  <p></p>
-  <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
-  <div class="file-name">
+    <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
+
     <?php
     $valideateSubjectMarks = new ValidateSubjectMarks();
     $valideateSubjectMarks->validateUserInput($textArea);
     ?>
-    <table style="border:1px solid black;">
+    <table>
       <tr>
         <?php
         $valideateSubjectMarks->getSubject();
@@ -160,7 +159,6 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
         ?>
       </tr>
     </table>
-
 
   </div>
 

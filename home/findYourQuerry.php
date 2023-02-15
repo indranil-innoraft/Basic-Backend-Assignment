@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+//this will redirect the page based on user input.
 switch ($_GET['q']) {
   case '1':
     header('Location: ../form/login.php');

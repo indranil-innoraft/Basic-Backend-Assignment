@@ -1,8 +1,6 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 
 
 session_start();
@@ -66,8 +64,8 @@ function checkSubjectMarks($textArea, $s, $m)
   global $subjects, $marks;
   $subjects = $s;
   $marks = $m;
-  
-  
+
+
   preg_match_all('/([0-9]+|[a-zA-Z]+)/', $textArea, $matches);
   for ($i = 0; $i < count($matches[0]); $i++) {
     if ($i % 2 == 0) {
@@ -101,9 +99,9 @@ function checkEmail($email)
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "GET"
     ));
-    
+
     $response = curl_exec($curl);
-    
+
     curl_close($curl);
     echo $response;
   }
@@ -111,7 +109,7 @@ function checkEmail($email)
 
 function checkPhoneNo($phoneNo)
 {
-  
+
   if (empty($phoneNo)) {
     $_SESSION['formErrorMsg'] = "field should not be empty.";
     header("Location:formWithEmail.php");
@@ -135,26 +133,30 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
 
 <!DOCTYPE html>
 <html lang="en">
-  
-  <head>
+
+<head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHP</title>
+  <title>Assignment-6 Output</title>
+  <link rel="stylesheet" href="../outputScreenStyle.css">
 </head>
 
 <body>
-  <h1>Hello
+
+  <div class="info">
+    <h1>Hello
+      <?php
+      echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+      ?>
+    </h1>
     <?php
-    echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+    echo "<p>Phone no : " . $_SESSION['phone'] . "</p>";
+    echo "<p>Email id : " . $_SESSION['emailId'] . "</p>";
     ?>
-  </h1>
-  <?php
-  echo "phone no :" . $_SESSION['phone'] . "<br>";
-  echo "email id " . $_SESSION['emailId'];
-  ?>
-  <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
-    
+
+    <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
+    <h6>Subject With Marks</h6>
     <table style="border:1px solid black;">
       <tr>
         <?php
@@ -168,12 +170,11 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
         ?>
       </tr>
     </table>
-    <?php 
-    header("Location:makePdf.php"); 
-    ?>
-    
+    <a href="makePdf.php">Generate PDF Now</a>
   </div>
   
+  </div>
+
 </body>
 
 </html>

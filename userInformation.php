@@ -6,16 +6,14 @@ session_start();
 
 class UserInfo
 {
+    private string $firstName;
+    private string $lastName;
+  //  $phoneNo;
+  //   $emailId;
+  //  $subjets = [];
+  //  $marks = [];
 
-
-  private string $firstName;
-  private string $lastName;
-  private string $phoneNo;
-  private string $emailId;
-  private $subjets = [];
-  private $marks = [];
-
-  public function getFirstName()
+   public function getFirstName()
   {
     return $this->firstName;
   }
@@ -25,59 +23,59 @@ class UserInfo
     return $this->lastName;
   }
 
-  public function getPhoneNo()
+  //  function getPhoneNo()
+  // {
+  //   return $this->phoneNo;
+  // }
+
+  //  function getEmailId()
+  // {
+  //   return $this->emailId;
+  // }
+
+  //  function getSubjcts()
+  // {
+  //   return $this->subjets;
+  // }
+
+  //  function getMarks()
+  // {
+  //   return $this->marks;
+  // }
+
+
+   public function setFirstName(string $firstName)
   {
-    return $this->phoneNo;
+    $this->firstName = $firstName;
   }
 
-  public function getEmailId()
+   public function setLastName(string $lastName)
   {
-    return $this->emailId;
-  }
 
-  public function getSubjcts()
-  {
-    return $this->subjets;
-  }
-
-  public function getMarks()
-  {
-    return $this->marks;
-  }
-
-
-  public function setFirstName(string $firstName)
-  {
-    $this->lastName = $firstName;
-  }
-
-  public function setLastName(string $lastName)
-  {
     $this->lastName = $lastName;
+    
   }
 
-  public function setPhoneNo(string $phone)
-  {
-    $this->phoneNo = $phone;
-  }
+  //  function setPhoneNo(string $phone)
+  // {
+  //   $this->phoneNo = $phone;
+  // }
 
-  public function setEmailId(string $emailId)
-  {
-    $this->emailId = $emailId;
-  }
+  //  function setEmailId(string $emailId)
+  // {
+  //   $this->emailId = $emailId;
+  // }
 
-  public function setSubjects(array $subject)
-  {
-    $this->subjets = $subject;
-  }
+  //  function setSubjects(array $subject)
+  // {
+  //   $this->subjets = $subject;
+  // }
 
-  public function setMarks(array $marks)
-  {
-    $this->marks = $marks;
-  }
+  //  function setMarks(array $marks)
+  // {
+  //   $this->marks = $marks;
+  // }
 }
 
+$user=new UserInfo();
 
-$user = new UserInfo();
-
-?>

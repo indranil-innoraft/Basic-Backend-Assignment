@@ -99,17 +99,20 @@ checkSubjectMarks($textArea, $subjects, $marks);
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHP</title>
+  <title>Assignment-4 Output</title>
+  <link rel="stylesheet" href="../outputScreenStyle.css">
+
 </head>
 
 <body>
+  <div class="info">
   <h1>Hello
     <?php
     echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
     ?>
   </h1>
   <?php
-  echo "phone no :" . $_SESSION['phone'];
+  echo "Phone no :" . $_SESSION['phone'];
   ?>
   <p></p>
   <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
@@ -118,6 +121,8 @@ checkSubjectMarks($textArea, $subjects, $marks);
     $valideateSubjectMarks = new ValidateSubjectMarks();
     $valideateSubjectMarks->validateUserInput($textArea);
     ?>
+  <h6>Subject With Marks</h6>
+
     <table style="border:1px solid black;">
       <tr>
         <?php
@@ -131,12 +136,7 @@ checkSubjectMarks($textArea, $subjects, $marks);
         ?>
       </tr>
     </table>
-
-      
-
-      
-
-    </table>
+    </div>
 
   </div>
 

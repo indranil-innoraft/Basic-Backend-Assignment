@@ -1,7 +1,6 @@
 <?php
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
+
+
 
 session_start();
 $_SESSION['emailId']="inndranil@gmail.com";
@@ -41,9 +40,12 @@ $marksArray=explode(' ',$_SESSION['marks']);
 foreach($marksArray as $mark){
     $pdf->cell(30,10,$mark,1,0,'C');
 }
+$pdf->Ln();
+$pdf->cell(111,50,'Uploded Image',1,0,'C');
+$pdf->cell(80,50,$pdf->Image($_SESSION['uploadedImage'],135,80,50,50),1,0,'C');
 
 $file='Submited Form' . date("Y-m-d",time());
-$pdf->Output($file,'D');
+$pdf->Output($file,'I');
 
 
 

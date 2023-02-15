@@ -29,7 +29,7 @@
       $_SESSION['name']="Indranil Roy";
       // set user email address.
       $_SESSION['email']="indranil.roy@innoraft.com";
-      header('Location: form/login.php');
+      header('Location: home/home.php');
     }
     else{
       $_SESSION['userValidateError']="invalid cradential,please try again.";

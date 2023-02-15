@@ -19,7 +19,7 @@ session_start();
     public function getSubject(){
         $_SESSION['subjects']=implode(" ",$this->subjects);
         foreach($this->subjects as $data){
-            echo "<td style='border:1px solid black;padding:10px;'>" . $data."</td>";
+            echo "<td>" . $data."</td>";
             
         }
     }
@@ -27,7 +27,7 @@ session_start();
     public function getMark(){
         $_SESSION['marks']=implode(" ",$this->marks);
         foreach($this->marks as $data){
-            echo "<td style='border:1px solid black;padding:10px;'>" . $data ."</td>" ;
+            echo "<td>" . $data ."</td>" ;
         }
     }
   }

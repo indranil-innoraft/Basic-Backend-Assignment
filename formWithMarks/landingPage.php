@@ -67,10 +67,13 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PHP</title>
+  <title>Assignment-3 Output</title>
+  <link rel="stylesheet" href="../outputScreenStyle.css">
+  
 </head>
 
 <body>
+  <div class="info">
   <h1>Hello
     <?php
     echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
@@ -78,12 +81,14 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
   </h1>
   <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
   <div class="file-name">
+  <h6>Subject With Marks</h6>
+
     <?php 
 
     $valideateSubjectMarks = new ValidateSubjectMarks();
     $valideateSubjectMarks->validateUserInput($textArea);
     ?>
-    <table style="border:1px solid black;">
+    <table>
       <tr>
         <?php
         $valideateSubjectMarks->getSubject();
@@ -96,9 +101,7 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
         ?>
       </tr>
     </table>
-
-    
-
+  </div>
   </div>
 
 </body>
