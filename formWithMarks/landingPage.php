@@ -2,17 +2,18 @@
 session_start();
 
 include('../userInformation.php');
+require('../checkSubjectMarks.php');
 
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 $textArea = $_POST['textArea'];
-
 
 $fileName = $_FILES['image']['name'];
 $filePath = $_FILES['image']['full_path'];
 $type = $_FILES['image']['type'];
 $tempName = $_FILES['image']['tmp_name'];
 $size = $_FILES['image']['size'];
+
 
 
 function ckeckUserInfo($firstName, $lastName, $user)
@@ -44,25 +45,10 @@ function checkUploadedFile($fileName, $tempName)
     header('Location:formWithMarks.php');
   }
 }
-$subjects = array();
-$marks = array();
-
-function checkSubjectMarks($textArea, $s, $m)
-{
-  global $subjects, $marks;
-  $subjects = $s;
-  $marks = $m;
 
 
-  preg_match_all('/([0-9]+|[a-zA-Z]+)/', $textArea, $matches);
-  for ($i = 0; $i < count($matches[0]); $i++) {
-    if ($i % 2 == 0) {
-      array_push($subjects, ($matches[0])[$i]);
-    } else {
-      array_push($marks, ($matches[0])[$i]);
-    }
-  }
-}
+
+
 
 
 
@@ -70,7 +56,7 @@ function checkSubjectMarks($textArea, $s, $m)
 
 checkUploadedFile($fileName, $tempName);
 ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
-checkSubjectMarks($textArea, $subjects, $marks);
+
 
 ?>
 
@@ -92,27 +78,26 @@ checkSubjectMarks($textArea, $subjects, $marks);
   </h1>
   <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
   <div class="file-name">
-    <?php echo $_SESSION['uploadedImage']; ?>
-    <table style="border:1px solid back;">
-      <!-- <tr>
-   
-      <?php
+    <?php 
 
-      if ($j != count($subjects)) {
-        $length = strlen($subjects[$j]);
-        if ($length > 15 || is_numeric($subjects[$j])) {
-          $_SESSION['formErrorMsg'] = "proper format is English|80";
-          header('location:formWithMarks.php');
-        }
-      }
+    $valideateSubjectMarks = new ValidateSubjectMarks();
+    $valideateSubjectMarks->validateUserInput($textArea);
+    ?>
+    <table style="border:1px solid black;">
+      <tr>
+        <?php
+        $valideateSubjectMarks->getSubject();
+        ?>
+      </tr>
 
-
-
-      ?>
-
-          </tr> -->
-
+      <tr>
+        <?php
+        $valideateSubjectMarks->getMark();
+        ?>
+      </tr>
     </table>
+
+    
 
   </div>
 

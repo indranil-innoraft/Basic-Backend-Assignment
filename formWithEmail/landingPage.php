@@ -2,6 +2,8 @@
 session_start();
 
 include('../userInformation.php');
+require('../checkSubjectMarks.php');
+require('../email.php');
 
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
@@ -10,8 +12,18 @@ $phoneNo = $_POST['phNum'];
 
 $email = $_POST['email'];
 
-$apiKey = "STTONsCShOh5qIQFmndLNgiz3nfgFRN9";
 
+
+$emailFetch=new Email();
+
+if($emailFetch->validateEmail($email)===true){
+  $_SESSION['email']=$email;
+}
+else{
+  $_SESSION['formErrorMsg'] = "email is not valid.";
+  header("Location:formWithEmail.php");
+
+}
 
 $fileName = $_FILES['image']['name'];
 $filePath = $_FILES['image']['full_path'];
@@ -35,7 +47,6 @@ function ckeckUserInfo($firstName, $lastName, $user)
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
   }
-  
 }
 
 
@@ -50,25 +61,7 @@ function checkUploadedFile($fileName, $tempName)
     header("Location:formWithEmail.php");
   }
 }
-$subjects = array();
-$marks = array();
 
-function checkSubjectMarks($textArea, $s, $m)
-{
-  global $subjects, $marks;
-  $subjects = $s;
-  $marks = $m;
-
-
-  preg_match_all('/([0-9]+|[a-zA-Z]+)/', $textArea, $matches);
-  for ($i = 0; $i < count($matches[0]); $i++) {
-    if ($i % 2 == 0) {
-      array_push($subjects, ($matches[0])[$i]);
-    } else {
-      array_push($marks, ($matches[0])[$i]);
-    }
-  }
-}
 
 function checkEmail($email)
 {
@@ -122,7 +115,7 @@ function checkPhoneNo($phoneNo)
 checkPhoneNo($phoneNo);
 checkUploadedFile($fileName, $tempName);
 ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
-// checkSubjectMarks($textArea,$subjects,$marks);
+
 
 ?>
 
@@ -134,6 +127,7 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PHP</title>
+  <!-- <link rel="stylesheet" href="../style.css"> -->
 </head>
 
 <body>
@@ -149,9 +143,24 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
   <p></p>
   <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
   <div class="file-name">
-    <?php echo $_SESSION['uploadedImage']; ?>
-    <table style="border:1px solid back;">
+    <?php
+    $valideateSubjectMarks = new ValidateSubjectMarks();
+    $valideateSubjectMarks->validateUserInput($textArea);
+    ?>
+    <table style="border:1px solid black;">
+      <tr>
+        <?php
+        $valideateSubjectMarks->getSubject();
+        ?>
+      </tr>
+
+      <tr>
+        <?php
+        $valideateSubjectMarks->getMark();
+        ?>
+      </tr>
     </table>
+
 
   </div>
 

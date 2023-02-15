@@ -39,7 +39,7 @@
             </div>
             <!-- text area field -->
             <div class="mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Marks"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Marks" name="textArea"></textarea>
             </div>
             <!-- phone number -->
             <div class="form-group Num">
@@ -61,6 +61,7 @@
                 if (isset($_SESSION['formErrorMsg'])) {
                     $errorMsg = $_SESSION['formErrorMsg'];
                     echo $errorMsg;
+                    unset($_SESSION['formErrorMsg']);
                 } ?>
             </div>
             <!-- submit button -->

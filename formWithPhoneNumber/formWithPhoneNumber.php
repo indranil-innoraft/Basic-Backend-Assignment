@@ -39,14 +39,14 @@
       </div>
       <!-- text area field -->
       <div class="mb-3">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Marks"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Enter Marks" name="textArea"></textarea>
       </div>
       <div class="form-group Num">
         <div class="code">
           <span class="country_code" style="color: white;">+91</span>
         </div>
         <div class="input_num">
-          <input type="text" class=" form-control" name="phNum" id="ec-mobile-number" aria-describedby="emailHelp" placeholder="Phone no" maxlength="10" value="" />
+          <input type="text" class=" form-control" name="phNum" id="ec-mobile-number" aria-describedby="emailHelp" placeholder="Phone no" maxlength="15" aria-row="10" value="" />
         </div>
 
       </div>

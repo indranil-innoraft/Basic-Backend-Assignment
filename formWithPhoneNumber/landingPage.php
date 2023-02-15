@@ -2,11 +2,13 @@
 session_start();
 
 include('../userInformation.php');
+require('../checkSubjectMarks.php');
 
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 $textArea = $_POST['textArea'];
 $phoneNo = $_POST['phNum'];
+
 
 
 
@@ -112,24 +114,27 @@ checkSubjectMarks($textArea, $subjects, $marks);
   <p></p>
   <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
   <div class="file-name">
-    <?php echo $_SESSION['uploadedImage']; ?>
-    <table style="border:1px solid back;">
-      <!-- <tr>
-   
-      <?php
+    <?php
+    $valideateSubjectMarks = new ValidateSubjectMarks();
+    $valideateSubjectMarks->validateUserInput($textArea);
+    ?>
+    <table style="border:1px solid black;">
+      <tr>
+        <?php
+        $valideateSubjectMarks->getSubject();
+        ?>
+      </tr>
 
-      if ($j != count($subjects)) {
-        $length = strlen($subjects[$j]);
-        if ($length > 15 || is_numeric($subjects[$j])) {
-          $_SESSION['formErrorMsg'] = "proper format is English|80";
-          header("Location:formWithPhoneNumber.php");
-        }
-      }
+      <tr>
+        <?php
+        $valideateSubjectMarks->getMark();
+        ?>
+      </tr>
+    </table>
 
+      
 
-      ?>
-
-          </tr> -->
+      
 
     </table>
 
