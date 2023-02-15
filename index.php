@@ -21,11 +21,11 @@
   <form action="userValidation.php" method="post">
     <!-- email id field -->
     <div class="form-group">
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email">
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email" required>
     </div>
     <!-- password field-->
     <div class="form-group">
-      <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+      <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password" required>
     </div>
     <!-- error class -->
     <div class="error">

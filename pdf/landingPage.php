@@ -1,7 +1,14 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 session_start();
 
 include('../userInformation.php');
+require('../checkSubjectMarks.php');
 
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
@@ -12,6 +19,8 @@ $email = $_POST['email'];
 
 $apiKey = "STTONsCShOh5qIQFmndLNgiz3nfgFRN9";
 
+$valideateSubjectMarks = new ValidateSubjectMarks();
+$valideateSubjectMarks->validateUserInput($textArea);
 
 $fileName = $_FILES['image']['name'];
 $filePath = $_FILES['image']['full_path'];
@@ -35,7 +44,6 @@ function ckeckUserInfo($firstName, $lastName, $user)
     $_SESSION['firstName'] = $firstName;
     $_SESSION['lastName'] = $lastName;
   }
-  header("Location:makePdf.php");
 }
 
 
@@ -58,8 +66,8 @@ function checkSubjectMarks($textArea, $s, $m)
   global $subjects, $marks;
   $subjects = $s;
   $marks = $m;
-
-
+  
+  
   preg_match_all('/([0-9]+|[a-zA-Z]+)/', $textArea, $matches);
   for ($i = 0; $i < count($matches[0]); $i++) {
     if ($i % 2 == 0) {
@@ -93,9 +101,9 @@ function checkEmail($email)
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => "GET"
     ));
-
+    
     $response = curl_exec($curl);
-
+    
     curl_close($curl);
     echo $response;
   }
@@ -103,7 +111,7 @@ function checkEmail($email)
 
 function checkPhoneNo($phoneNo)
 {
-
+  
   if (empty($phoneNo)) {
     $_SESSION['formErrorMsg'] = "field should not be empty.";
     header("Location:formWithEmail.php");
@@ -117,18 +125,18 @@ function checkPhoneNo($phoneNo)
 
 
 
-// checkEmail($email);
+
 checkPhoneNo($phoneNo);
 checkUploadedFile($fileName, $tempName);
 ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
-// checkSubjectMarks($textArea,$subjects,$marks);
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  
+  <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -145,15 +153,27 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
   echo "phone no :" . $_SESSION['phone'] . "<br>";
   echo "email id " . $_SESSION['emailId'];
   ?>
-  <p></p>
   <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
-  <div class="file-name">
-    <?php echo $_SESSION['uploadedImage']; ?>
-    <table style="border:1px solid back;">
+    
+    <table style="border:1px solid black;">
+      <tr>
+        <?php
+        $valideateSubjectMarks->getSubject();
+        ?>
+      </tr>
+
+      <tr>
+        <?php
+        $valideateSubjectMarks->getMark();
+        ?>
+      </tr>
     </table>
-
+    <?php 
+    header("Location:makePdf.php"); 
+    ?>
+    
   </div>
-
+  
 </body>
 
 </html>
