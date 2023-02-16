@@ -8,7 +8,7 @@ class UserInfo
 {
     private string $firstName;
     private string $lastName;
-  //  $phoneNo;
+    private string $phoneNo;
   //   $emailId;
   //  $subjets = [];
   //  $marks = [];
@@ -23,10 +23,10 @@ class UserInfo
     return $this->lastName;
   }
 
-  //  function getPhoneNo()
-  // {
-  //   return $this->phoneNo;
-  // }
+   function getPhoneNumber()
+  {
+    return $this->phoneNo;
+  }
 
   //  function getEmailId()
   // {
@@ -56,10 +56,10 @@ class UserInfo
     
   }
 
-  //  function setPhoneNo(string $phone)
-  // {
-  //   $this->phoneNo = $phone;
-  // }
+  public function setPhoneNumber($phoneNo)
+  {
+    $this->phoneNo = $phoneNo;
+  }
 
   //  function setEmailId(string $emailId)
   // {

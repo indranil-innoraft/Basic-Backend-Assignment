@@ -3,6 +3,7 @@ session_start();
 
 include('../userInformation.php');
 require('../checkSubjectMarks.php');
+require('../validation.php');
 
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
@@ -10,7 +11,8 @@ $textArea = $_POST['textArea'];
 $phoneNo = $_POST['phNum'];
 
 
-
+$valideateSubjectMarks = new ValidateSubjectMarks();
+$valideateSubjectMarks->validateUserInput($textArea);
 
 
 $fileName = $_FILES['image']['name'];
@@ -20,75 +22,42 @@ $tempName = $_FILES['image']['tmp_name'];
 $size = $_FILES['image']['size'];
 
 
-function ckeckUserInfo($firstName, $lastName, $user)
-{
-  if (empty($firstName) || empty($lastName)) {
-    $_SESSION['formErrorMsg'] = "field should not be empty.";
-    header("Location:formWithPhoneNumber.php");
-  } else if (is_numeric($firstName) || is_numeric($lastName)) {
-    $_SESSION['formErrorMsg'] = "field should be alphabet.";
-    header("Location:formWithPhoneNumber.php");
-  } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
-    $_SESSION['formErrorMsg'] = "field should not be special character.";
-    header("Location:formWithPhoneNumber.php");
-  } else {
-    $_SESSION['firstName'] = $firstName;
-    $_SESSION['lastName'] = $lastName;
-  }
-}
 
 
-function checkUploadedFile($fileName, $tempName)
-{
-  if (strlen($fileName) != 0) {
-    $path = "../formWithImage/upload_image/" . $fileName;
-    $_SESSION['uploadedImage'] = $path;
-    move_uploaded_file($tempName, $path);
-  } else {
-    $_SESSION['formErrorMsg'] = "please upload file";
-    header("Location:formWithPhoneNumber.php");
-  }
-}
+
 $subjects = array();
 $marks = array();
 
-function checkSubjectMarks($textArea, $s, $m)
-{
-  global $subjects, $marks;
-  $subjects = $s;
-  $marks = $m;
-
-
-  preg_match_all('/([0-9]+|[a-zA-Z]+)/', $textArea, $matches);
-  for ($i = 0; $i < count($matches[0]); $i++) {
-    if ($i % 2 == 0) {
-      array_push($subjects, ($matches[0])[$i]);
-    } else {
-      array_push($marks, ($matches[0])[$i]);
-    }
-  }
+if($validate->checkPhoneNumber($phoneNo) === true){
+  $user->setPhoneNumber($_SESSION['phone']);
+}
+else{
+  header("Location:formWithPhoneNumber.php");
 }
 
-function checkPhoneNo($phoneNo)
-{
-
-  if (empty($phoneNo)) {
-    $_SESSION['formErrorMsg'] = "field should not be empty.";
-    header("Location:formWithPhoneNumber.php");
-  } else if (strlen($phoneNo) < 10 || strlen($phoneNo) > 10) {
-    $_SESSION['formErrorMsg'] = "not valid number";
-    header("Location:formWithPhoneNumber.php");
-  } else {
-    $_SESSION['phone'] = $phoneNo;
-  }
+//check user uploded photo is valid or not.
+if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) === false) {
+  //if invalid entry user need to redirect to the form page.
+  header('Location: formWithPhoneNumber.php');
+} else {
+  $path = "../formWithImage/upload_image/" . $fileName;
+  $_SESSION['uploadedImage'] = $path;
+  move_uploaded_file($tempName, $path);
 }
 
+//user name check.
+if ($validate->checkUserName($firstName, $lastName) === true) {
+  //set the session variable.
+  $_SESSION['firstName'] = $firstName;
+  $_SESSION['lastName'] = $lastName;
+  //set the data to the user object.
+  $user->setFirstName($firstName);
+  $user->setLastName($lastName);
+} 
+else {
+  header('Location: formWithPhoneNumber.php');
+}
 
-
-checkPhoneNo($phoneNo);
-checkUploadedFile($fileName, $tempName);
-ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
-checkSubjectMarks($textArea, $subjects, $marks);
 
 ?>
 
@@ -108,18 +77,20 @@ checkSubjectMarks($textArea, $subjects, $marks);
   <div class="info">
   <h1>Hello
     <?php
-    echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+    echo $user->getFirstName() . " " . $user->getLastName();
     ?>
   </h1>
   <?php
-  echo "Phone no :" . $_SESSION['phone'];
+  echo "Phone no :" . $user->getPhoneNumber();
   ?>
   <p></p>
   <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
   <div class="file-name">
     <?php
     $valideateSubjectMarks = new ValidateSubjectMarks();
-    $valideateSubjectMarks->validateUserInput($textArea);
+    if($valideateSubjectMarks->validateUserInput($textArea) === false){
+      header('Location: formWithPhoneNumber.php');
+    }
     ?>
   <h6>Subject With Marks</h6>
 

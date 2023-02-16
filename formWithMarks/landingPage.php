@@ -43,48 +43,6 @@ if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) 
 }
 
 
-function ckeckUserInfo($firstName, $lastName, $user)
-{
-  if (empty($firstName) || empty($lastName)) {
-    $_SESSION['formErrorMsg'] = "field should not be empty.";
-    header('Location:formWithMarks.php');
-  } else if (is_numeric($firstName) || is_numeric($lastName)) {
-    $_SESSION['formErrorMsg'] = "field should be alphabet.";
-    header('Location:formWithMarks.php');
-  } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
-    $_SESSION['formErrorMsg'] = "field should not be special character.";
-    header('Location:formWithMarks.php');
-  } else {
-    $_SESSION['firstName'] = $firstName;
-    $_SESSION['lastName'] = $lastName;
-  }
-}
-
-
-function checkUploadedFile($fileName, $tempName)
-{
-  if (strlen($fileName) != 0) {
-    $path = "../formWithImage/upload_image/" . $fileName;
-    $_SESSION['uploadedImage'] = $path;
-    move_uploaded_file($tempName, $path);
-  } else {
-    $_SESSION['formErrorMsg'] = "please upload file";
-    header('Location:formWithMarks.php');
-  }
-}
-
-
-
-
-
-
-
-
-
-// checkUploadedFile($fileName, $tempName);
-// ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +61,7 @@ function checkUploadedFile($fileName, $tempName)
   <div class="info">
     <h1>Hello
       <?php
-      echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+      echo $user->getFirstName() . " " . $user->getLastName();
       ?>
     </h1>
     <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
@@ -111,9 +69,12 @@ function checkUploadedFile($fileName, $tempName)
       <h6>Subject With Marks</h6>
 
       <?php
-
+      
       $valideateSubjectMarks = new ValidateSubjectMarks();
-      $valideateSubjectMarks->validateUserInput($textArea);
+      if($valideateSubjectMarks->validateUserInput($textArea) === false){
+        header('Location: formWithMarks.php');
+      }
+      
       ?>
       <table>
         <tr>

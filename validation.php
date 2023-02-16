@@ -47,6 +47,22 @@ class Validation
       return false;
     }
   }
+
+
+  public function checkPhoneNumber(string $phoneNo)
+{
+
+  if (empty($phoneNo)) {
+    $_SESSION['formErrorMsg'] = "field should not be empty.";
+    return false;
+  } else if (strlen($phoneNo) < 10 || strlen($phoneNo) > 10) {
+    $_SESSION['formErrorMsg'] = "not valid number";
+    return false;
+  } else {
+    $_SESSION['phone'] = $phoneNo;
+    return true;
+  }
+}
 }
 
 $validate = new Validation();

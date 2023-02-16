@@ -64,7 +64,7 @@ if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) 
   <div class="info">
     <h1>Hello
       <?php
-      echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+      echo $user->getFirstName() . " " .  $user->getLastName();
       ?>
     </h1>
     <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
