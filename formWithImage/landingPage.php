@@ -39,6 +39,10 @@ if ($validate->checkUserName($firstName, $lastName) === true) {
 if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) === false) {
   //if invalid entry user need to redirect to the form page.
   header('Location: formWithImage.php');
+} else {
+  $path = "upload_image/" . $fileName;
+  $_SESSION['uploadedImage'] = $path;
+  move_uploaded_file($tempName, $path);
 }
 
 ?>

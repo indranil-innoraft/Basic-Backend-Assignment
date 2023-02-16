@@ -14,7 +14,7 @@
 
 <body style="background-color: black;">
   <?php
-  include("../header/header.php");
+  require("../header/header.php");
 
   ?>
 

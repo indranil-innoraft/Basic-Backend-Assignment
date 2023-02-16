@@ -1,8 +1,12 @@
 <?php
 session_start();
 
-include('../userInformation.php');
+//import the userInfo class.
+require('../userInformation.php');
+//import the checkSubjectMarks class.
 require('../checkSubjectMarks.php');
+//import the validate class.
+require('../validation.php');
 
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
@@ -14,6 +18,29 @@ $type = $_FILES['image']['type'];
 $tempName = $_FILES['image']['tmp_name'];
 $size = $_FILES['image']['size'];
 
+
+// check user enter a propper name or not.
+if ($validate->checkUserName($firstName, $lastName) === true) {
+  //set the session variable.
+  $_SESSION['firstName'] = $firstName;
+  $_SESSION['lastName'] = $lastName;
+  //set the data to the user object.
+  $user->setFirstName($firstName);
+  $user->setLastName($lastName);
+} else {
+  //if invalid entry user need to redirect to the form page.
+  header('Location: formWithMarks.php');
+}
+
+//check user uploded photo is valid or not.
+if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) === false) {
+  //if invalid entry user need to redirect to the form page.
+  header('Location: formWithMarks.php');
+} else {
+  $path = "../formWithImage/upload_image/" . $fileName;
+  $_SESSION['uploadedImage'] = $path;
+  move_uploaded_file($tempName, $path);
+}
 
 
 function ckeckUserInfo($firstName, $lastName, $user)
@@ -54,8 +81,8 @@ function checkUploadedFile($fileName, $tempName)
 
 
 
-checkUploadedFile($fileName, $tempName);
-ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
+// checkUploadedFile($fileName, $tempName);
+// ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
 
 
 ?>
@@ -69,39 +96,39 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assignment-3 Output</title>
   <link rel="stylesheet" href="../outputScreenStyle.css">
-  
+
 </head>
 
 <body>
   <div class="info">
-  <h1>Hello
-    <?php
-    echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
-    ?>
-  </h1>
-  <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
-  <div class="file-name">
-  <h6>Subject With Marks</h6>
+    <h1>Hello
+      <?php
+      echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+      ?>
+    </h1>
+    <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
+    <div class="file-name">
+      <h6>Subject With Marks</h6>
 
-    <?php 
+      <?php
 
-    $valideateSubjectMarks = new ValidateSubjectMarks();
-    $valideateSubjectMarks->validateUserInput($textArea);
-    ?>
-    <table>
-      <tr>
-        <?php
-        $valideateSubjectMarks->getSubject();
-        ?>
-      </tr>
+      $valideateSubjectMarks = new ValidateSubjectMarks();
+      $valideateSubjectMarks->validateUserInput($textArea);
+      ?>
+      <table>
+        <tr>
+          <?php
+          $valideateSubjectMarks->getSubject();
+          ?>
+        </tr>
 
-      <tr>
-        <?php
-        $valideateSubjectMarks->getMark();
-        ?>
-      </tr>
-    </table>
-  </div>
+        <tr>
+          <?php
+          $valideateSubjectMarks->getMark();
+          ?>
+        </tr>
+      </table>
+    </div>
   </div>
 
 </body>

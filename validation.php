@@ -40,9 +40,6 @@ class Validation
         $_SESSION['formErrorMsg'] = "please upload a image less then 6MB";
         return false;
       }
-      $path = "upload_image/" . $fileName;
-      $_SESSION['uploadedImage'] = $path;
-      move_uploaded_file($tempName, $path);
       return true;
     } 
     else {
