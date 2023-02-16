@@ -1,52 +1,45 @@
 <?php
 session_start();
 
-include('../userInformation.php');
+//it will include the userInfo class.
+require('../userInformation.php');
+//it will include the validation class.
+require('../validation.php');
 
+/**
+ * @param string $firstName.
+ * @param string $lastName.
+ */
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 
-
+/**
+ *geting the $_FILES array variale value in the different variable.
+ */
 $fileName = $_FILES['image']['name'];
 $filePath = $_FILES['image']['full_path'];
 $type = $_FILES['image']['type'];
 $tempName = $_FILES['image']['tmp_name'];
 $size = $_FILES['image']['size'];
 
-
-function ckeckUserInfo($firstName, $lastName, $user)
-{
-    if (empty($firstName) || empty($lastName)) {
-        $_SESSION['formErrorMsg'] = "field should not be empty.";
-        header('Location:formWithImage.php');
-    } else if (is_numeric($firstName) || is_numeric($lastName)) {
-        $_SESSION['formErrorMsg'] = "field should be alphabet.";
-        header('Location:formWithImage.php');
-    } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
-        $_SESSION['formErrorMsg'] = "field should not be special character.";
-        header('Location:formWithImage.php');
-    } else {
-        $_SESSION['firstName'] = $firstName;
-        $_SESSION['lastName'] = $lastName;
-    }
+// check user enter a propper name or not.
+if ($validate->checkUserName($firstName, $lastName) === true) {
+  //set the session variable.
+  $_SESSION['firstName'] = $firstName;
+  $_SESSION['lastName'] = $lastName;
+  //set the data to the user object.
+  $user->setFirstName($firstName);
+  $user->setLastName($lastName);
+} else {
+  //if invalid entry user need to redirect to the form page.
+  header('Location: formWithImage.php');
 }
 
-
-function checkUploadedFile($fileName, $tempName)
-{
-    if (isset($fileName)) {
-        $path = "upload_image/" . $fileName;
-        $_SESSION['uploadedImage'] = $path;
-        move_uploaded_file($tempName, $path);
-    } else {
-        $_SESSION['formErrorMsg'] = "please upload file";
-        header('Location:formWithImage.php');
-    }
+//check user uploded photo is valid or not.
+if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) === false) {
+  //if invalid entry user need to redirect to the form page.
+  header('Location: formWithImage.php');
 }
-
-checkUploadedFile($fileName, $tempName);
-
-ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
 
 ?>
 
@@ -54,25 +47,25 @@ ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment-2 Output</title>
-    <link rel="stylesheet" href="../outputScreenStyle.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment-2 Output</title>
+  <link rel="stylesheet" href="../outputScreenStyle.css">
 
-    
+
 </head>
 
 <body>
-    <div class="info">
+  <div class="info">
     <h1>Hello
-        <?php
-        echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
-        ?>
+      <?php
+      echo $_SESSION['firstName'] . " " . $_SESSION['lastName'];
+      ?>
     </h1>
     <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
-    
-    </div>
+
+  </div>
 
 
 </body>
