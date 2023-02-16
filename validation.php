@@ -8,7 +8,7 @@ session_start();
 class Validation
 {
 
-  public function ckeckUserName($firstName, $lastName)
+  public function checkUserName($firstName, $lastName)
   {
     if (empty($firstName) || empty($lastName)) {
       $_SESSION['formErrorMsg'] = "field should not be empty.";

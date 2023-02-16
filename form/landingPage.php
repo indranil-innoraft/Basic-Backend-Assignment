@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-
 //include the userInformation.
-include('../userInformation.php');
-
+require('../userInformation.php');
+//it include validation class for validate the inputs.
+require('../validation.php');
 
 /**
  * @param string $firstName
@@ -14,41 +14,18 @@ include('../userInformation.php');
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 
-
-/**
- * * @method checkUserInfo()
- *   check user has enter the valid name or not.
- */
-
-function ckeckUserInfo($firstName, $lastName, $user)
-{
-  if (empty($firstName) || empty($lastName)) {
-    $_SESSION['formErrorMsg'] = "field should not be empty.";
-    header('Location:login.php');
-  } else if (is_numeric($firstName) || is_numeric($lastName)) {
-    $_SESSION['formErrorMsg'] = "field should be alphabet.";
-    header('Location:login.php');
-  } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
-    $_SESSION['formErrorMsg'] = "field should not be special character.";
-    header('Location:login.php');
-  } else {
-    //set the session variable.
-    $_SESSION['firstName'] = $firstName;
-    $_SESSION['lastName'] = $lastName;
-    //set data to user object.
-    $user->setFirstName($firstName);
-    $user->setLastName($lastName);
-  }
+// check user enter a propper name or not.
+if ($validate->checkUserName($firstName, $lastName) === true) {
+  //set the session variable.
+  $_SESSION['firstName'] = $firstName;
+  $_SESSION['lastName'] = $lastName;
+  //set the data to the user object.
+  $user->setFirstName($firstName);
+  $user->setLastName($lastName);
+} 
+else {
+  header('Location: login.php');
 }
-
-
-
-
-/**
- * call the method checkUserInfo.
- */
-ckeckUserInfo($firstName, $lastName, $user);
-
 
 ?>
 <!DOCTYPE html>
@@ -62,16 +39,15 @@ ckeckUserInfo($firstName, $lastName, $user);
   <link rel="stylesheet" href="../outputScreenStyle.css">
 
 </head>
-
 <body>
+  <!-- show the result -->
   <div class="info">
-  <h1>Hello
-    <?php
-    echo $user->getFirstName() . " " . $user->getlastName();
-    ?>
-  </h1>
+    <h1>Hello
+      <?php
+      echo $user->getFirstName() . " " . $user->getlastName();
+      ?>
+    </h1>
   </div>
 
 </body>
-
 </html>

@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -57,5 +56,4 @@ session_start();
   <!-- javascript link -->
   <script src="script.js"></script>
 </body>
-
 </html>
