@@ -26,7 +26,6 @@ class ValidateSubjectMarks
       $_SESSION['formErrorMsg'] = "field should not be empty.";
       return false;
     }
-    if (preg_match(('/\n/'), $textArea )) {
       $rawData = explode("\n", $textArea);
       $i = 0;
       $j = 0;
@@ -38,7 +37,7 @@ class ValidateSubjectMarks
           $_SESSION['formErrorMsg'] = "please follow the specified format.";
           return false;
         }
-        if (preg_match('/[0-9]/', $raw[1])) {
+        if (preg_match('/[0-9]/', $raw[1]) && $raw[1]<100 && $raw[1]>0) {
           $this->marks[$j++] = $raw[1];
         } else {
           $_SESSION['formErrorMsg'] = "please follow the specified format.";
@@ -46,11 +45,6 @@ class ValidateSubjectMarks
         }
       }
       return true;
-    } 
-    else {
-      $_SESSION['formErrorMsg'] = "please follow the specified format.";
-      return false;
-    }
   }
   /**
    *   display the Subject array.

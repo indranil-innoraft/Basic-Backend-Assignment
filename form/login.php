@@ -1,5 +1,8 @@
 <?php
-session_start();
+ session_start();
+ if (!isset($_SESSION['login'])) {
+  header('location: ../index.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,20 +21,18 @@ session_start();
 
 <body>
 
-  <?php
-  //this will include the nav bar.
-  require('../header/header.php');
-  ?>
+  <!-- This will include the nav bar. -->
+  <?php require('../header/header.php'); ?>
 
   <div class="container">
-    <form action="landingPage.php" method="post">
+    <form action="landingPage.php" method="post" >
       <!-- First name field -->
       <div class="mb-3">
-        <input type="text"  id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
+        <input type="text" id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
       </div>
       <!-- Last name field -->
       <div class="mb-3">
-        <input type="text"  id="typingLastName" name="lname" placeholder="Last Name" class="form-control" required>
+        <input type="text" id="typingLastName" name="lname" placeholder="Last Name" class="form-control" required>
       </div>
       <!-- full name field -->
       <div class="mb-3">
@@ -40,20 +41,24 @@ session_start();
       <!-- error section -->
       <div class="error">
         <?php
-          //if some error occur after submitting the form its show the error message this area.
+        //If some error occur after submitting the form its show the error message this area.
         if (isset($_SESSION['formErrorMsg'])) {
-          //@param string $error_msg
           $error_msg = $_SESSION['formErrorMsg'];
           echo $error_msg;
           //After reload the page it shouldn't show the same error.
           unset($_SESSION['formErrorMsg']);
-        } ?>
+        } 
+        ?>
       </div>
       <!-- submit button -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-  <!-- javascript link -->
+   <!-- jquery cdn -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <!-- javascript link -->
   <script src="script.js"></script>
+  <script src="../validation.js"></script>
 </body>
+
 </html>

@@ -1,22 +1,20 @@
 <?php
 session_start();
 
-//include the userInformation.
-require('../userInformation.php');
-//it include validation class for validate the inputs.
-require('../validation.php');
+if(!isset($_SESSION['login'])){
+  header('location: ../index.php');
+ }
 
-/**
- * @param string $firstName
- * @param  string $lastName 
- */
+//Include the userInformation.
+require('../userInformation.php');
+//It include validation class for validate the inputs.
+require('../validation.php');
 
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 
 // check user enter a propper name or not.
 if ($validate->checkUserName($firstName, $lastName) === true) {
-  //set the session variable.
   $_SESSION['firstName'] = $firstName;
   $_SESSION['lastName'] = $lastName;
   //set the data to the user object.

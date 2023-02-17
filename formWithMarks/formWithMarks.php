@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['login'])){
+  header('location: ../index.php');
+ }
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,11 +30,11 @@
     <form action="landingPage.php" method="post" enctype="multipart/form-data">
       <!-- First name field -->
       <div class="mb-3">
-        <input type="text"  id="typingFirstName" name="fname" class="form-control " placeholder="First Name">
+        <input type="text"  id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
       </div>
       <!-- Last name field -->
       <div class="mb-3">
-        <input type="text"  id="typingLastName" name="lname" placeholder="Last Name" class="form-control">
+        <input type="text"  id="typingLastName" name="lname" placeholder="Last Name" class="form-control" required>
       </div>
       <!-- full name field -->
       <div class="mb-3">
@@ -35,11 +43,11 @@
       <!-- upload image field -->
       <div class="mb-3">
         <label for="formFile" class="form-label" style="color: white;">Upload Image</label>
-        <input class="form-control" name="image" type="file" id="formFile">
+        <input class="form-control" name="image" type="file" id="formFile" accept="image/png, image/gif, image/jpeg">
       </div>
       <!-- text area field -->
       <div class="mb-3">
-        <textarea class="form-control" placeholder="Enter marks" name="textArea" id="exampleFormControlTextarea1" rows="5"></textarea>
+        <textarea class="form-control" placeholder="Enter subject|Marks" name="textArea" id="exampleFormControlTextarea1" rows="5" required></textarea>
       </div>
       <!-- error section -->
       <div class="error">

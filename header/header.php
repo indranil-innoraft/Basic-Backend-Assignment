@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['login'])){
+  header('location: ../index.php');
+ }
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position:sticky; top:0; ">

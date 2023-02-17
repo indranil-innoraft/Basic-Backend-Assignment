@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['login'])){
+  header('location: ../index.php');
+ }
+
 //include userInfo class.
 include('../userInformation.php');
 require('../checkSubjectMarks.php');
@@ -18,6 +22,7 @@ $emailFetch = new Email();
 
 if ($emailFetch->validateEmail($email) === true) {
   $_SESSION['email'] = $email;
+  $user->setEmailId($email);
 } else {
   $_SESSION['formErrorMsg'] = "email is not valid.";
   header("Location:formWithEmail.php");
@@ -83,7 +88,7 @@ else{
     </h1>
     <?php
     echo "<p>Phone no :" . $user->getPhoneNumber() . "</p>";
-    echo "<p>Email id :" . $_SESSION['emailId'] . "</p>";
+    echo "<p>Email id :" . $user->getEmailId() . "</p>";
     ?>
     <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
 

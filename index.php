@@ -31,9 +31,9 @@
     <div class="error">
       <?php
       if(isset($_SESSION['userValidateError'])){
-        //@param string $error_msg
         $error_msg = $_SESSION['userValidateError'];
         echo $error_msg;
+        //On reload error should not be displayed on screen.
         unset($_SESSION['userValidateError']);
       }
       ?>

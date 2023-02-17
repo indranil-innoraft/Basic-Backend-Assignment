@@ -1,81 +1,119 @@
 <?php
 session_start();
 /**
- * store user related information.
+ * Store user related information using setter and getter methods.
+ * @method public getFirstName()
+ *   Return first name of the user.
+ * @method public getLastName()
+ *   Return public last name of the user.
+ * @method public getEmailId()
+ *   Return email id of the user.
+ * @method public getPhoneNumber()
+ *   Return phone number of the user.
+ * @method public setFirstName()
+ *   Set first name of the user.
+ * @method public setLastName()
+ *   Set last name of the user.
+ * @method public setEmailId()
+ *   Set email id of the user.
+ * @method public setPhoneNumber()
+ *   Set phone number of the user.
  */
 
 class UserInfo
 {
-    private string $firstName;
-    private string $lastName;
-    private string $phoneNo;
-  //   $emailId;
-  //  $subjets = [];
-  //  $marks = [];
+  /**
+   * @global String $firstName
+   *   Store user first name.
+   * @global String $lastName
+   *   Store user last name.
+   * @global String $phoneNo
+   *   Store user phone number.
+   * @global String $emailId
+   *   Store user email id.
+   */
 
-   public function getFirstName()
+  private string $firstName;
+  private string $lastName;
+  private string $phoneNo;
+  private string $emailId;
+
+  /**
+   * Get the value of the firstName.
+   *
+   * @return string
+   */
+  public function getFirstName()
   {
     return $this->firstName;
   }
 
+  /**
+   * Get the value of the lastName.
+   *
+   * @return string
+   */
   public function getLastName()
   {
     return $this->lastName;
   }
 
-   function getPhoneNumber()
+  /**
+   * Get the value of the phone number.
+   *
+   * @return string
+   */
+  function getPhoneNumber()
   {
     return $this->phoneNo;
   }
 
-  //  function getEmailId()
-  // {
-  //   return $this->emailId;
-  // }
+  /**
+   * Get the value of the emailId.
+   *
+   * @return string
+   */
+  function getEmailId()
+  {
+    return $this->emailId;
+  }
 
-  //  function getSubjcts()
-  // {
-  //   return $this->subjets;
-  // }
-
-  //  function getMarks()
-  // {
-  //   return $this->marks;
-  // }
-
-
-   public function setFirstName(string $firstName)
+  /**
+   * @param string $firstName.
+   *   Set the value of the firstName.
+   */
+  public function setFirstName(string $firstName)
   {
     $this->firstName = $firstName;
   }
 
-   public function setLastName(string $lastName)
+  /**
+   * @param string $lastName.
+   *   Set the value of the lastName.
+   */
+  public function setLastName(string $lastName)
   {
 
     $this->lastName = $lastName;
-    
   }
 
-  public function setPhoneNumber($phoneNo)
+  /**
+   * @param string $phoneNo.
+   *   Set the value of the phone number.
+   */
+  public function setPhoneNumber(string $phoneNo)
   {
     $this->phoneNo = $phoneNo;
   }
 
-  //  function setEmailId(string $emailId)
-  // {
-  //   $this->emailId = $emailId;
-  // }
-
-  //  function setSubjects(array $subject)
-  // {
-  //   $this->subjets = $subject;
-  // }
-
-  //  function setMarks(array $marks)
-  // {
-  //   $this->marks = $marks;
-  // }
+  /**
+   * @param string $emailId.
+   *   Set the value of the emailId.
+   */
+  function setEmailId(string $emailId)
+  {
+    $this->emailId = $emailId;
+  }
 }
 
-$user=new UserInfo();
-
+$user = new UserInfo();

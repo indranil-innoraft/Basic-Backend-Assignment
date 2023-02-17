@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['login'])){
+    header('location: ../index.php');
+   }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,11 +30,11 @@
         <form action="landingPage.php" method="post" enctype="multipart/form-data">
             <!-- First name field -->
             <div class="mb-3">
-                <input type="text"  id="typingFirstName" name="fname" class="form-control " placeholder="First Name">
+                <input type="text"  id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
             </div>
             <!-- Last name field -->
             <div class="mb-3">
-                <input type="text"  id="typingLastName" name="lname" placeholder="Last Name" class="form-control">
+                <input type="text"  id="typingLastName" name="lname" placeholder="Last Name" class="form-control" required>
             </div>
             <!-- full name field -->
             <div class="mb-3">
@@ -35,11 +43,11 @@
             <!-- upload image field -->
             <div class="mb-3">
                 <label for="formFile" class="form-label" style="color: white;">Upload Image</label>
-                <input class="form-control" name="image" type="file" id="formFile">
+                <input class="form-control" name="image" type="file" id="formFile" accept="image/png, image/gif, image/jpeg">
             </div>
             <!-- text area field -->
             <div class="mb-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Marks" name="textArea"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Marks" name="textArea" required></textarea>
             </div>
             <!-- phone number -->
             <div class="form-group Num">
@@ -48,12 +56,12 @@
                 </div>
                 
                 <div class="input_num">
-                    <input type="text" class=" form-control" name="phNum" id="ec-mobile-number" aria-describedby="emailHelp" placeholder="Phone no" maxlength="10" value="" />
+                    <input type="text" class=" form-control" name="phNum" id="ec-mobile-number" aria-describedby="emailHelp" placeholder="Phone no" maxlength="10" value="" required/>
                 </div>
             </div>
             <!-- email field  -->
             <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email" required>
             </div>
             <!-- error section -->
             <div class="error">
@@ -69,6 +77,10 @@
         </form>
     </div>
 
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <!-- jquery -->
+    <script src="../validation.js"></script>
     <script src="../form/script.js"></script>
 </body>
 

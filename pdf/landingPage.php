@@ -2,6 +2,10 @@
 
 session_start();
 
+if(!isset($_SESSION['login'])){
+  header('location: ../index.php');
+ }
+
 require('../userInformation.php');
 require('../checkSubjectMarks.php');
 require('../validation.php');
@@ -12,7 +16,6 @@ $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 $textArea = $_POST['textArea'];
 $phoneNo = $_POST['phNum'];
-
 $email = $_POST['email'];
 
 $apiKey = "STTONsCShOh5qIQFmndLNgiz3nfgFRN9";
@@ -37,6 +40,7 @@ $emailFetch = new Email();
 
 if ($emailFetch->validateEmail($email) === true) {
   $_SESSION['email'] = $email;
+  $user->setEmailId($email);
 } else {
   $_SESSION['formErrorMsg'] = "email is not valid.";
   header("Location: compleForm.php");
@@ -75,12 +79,6 @@ else{
   header("Location:compleForm.php");
 }
 
-
-// checkPhoneNo($phoneNo);
-// checkUploadedFile($fileName, $tempName);
-// ckeckUserInfo($firstName, $lastName, $image, $user, $fileName, $tempName);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +102,7 @@ else{
     </h1>
     <?php
     echo "<p>Phone no : " . $user->getPhoneNumber() . "</p>";
-    echo "<p>Email id : " . $_SESSION['emailId'] . "</p>";
+    echo "<p>Email id : " . $user->getEmailId() . "</p>";
     ?>
 
     <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />

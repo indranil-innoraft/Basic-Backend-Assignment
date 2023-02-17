@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['login'])){
+  header('location: ../index.php');
+ }
+
 //it will include the userInfo class.
 require('../userInformation.php');
 //it will include the validation class.

@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['login'])){
+  header('location: ../index.php');
+ }
+
 include('../userInformation.php');
 require('../checkSubjectMarks.php');
 require('../validation.php');
