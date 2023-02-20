@@ -2,6 +2,7 @@
 session_start();
 /**
  * Store user related information using setter and getter methods.
+ * 
  * @method public getFirstName()
  *   Return first name of the user.
  * @method public getLastName()
@@ -79,8 +80,8 @@ class UserInfo
   }
 
   /**
+   * Set the value of the firstName.
    * @param string $firstName.
-   *   Set the value of the firstName.
    */
   public function setFirstName(string $firstName)
   {
@@ -88,8 +89,8 @@ class UserInfo
   }
 
   /**
+   * Set the value of the lastName.
    * @param string $lastName.
-   *   Set the value of the lastName.
    */
   public function setLastName(string $lastName)
   {
@@ -98,8 +99,8 @@ class UserInfo
   }
 
   /**
+   * Set the value of the phone number.
    * @param string $phoneNo.
-   *   Set the value of the phone number.
    */
   public function setPhoneNumber(string $phoneNo)
   {
@@ -107,8 +108,8 @@ class UserInfo
   }
 
   /**
+   * Set the value of the emailId.
    * @param string $emailId.
-   *   Set the value of the emailId.
    */
   function setEmailId(string $emailId)
   {

@@ -2,11 +2,11 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
   header('location: ../index.php');
- }
+}
 
-//this will redirect the page based on user input.
+//This will redirect the page based on question number.
 switch ($_GET['q']) {
   case 1:
     header('Location: ../form/login.php');

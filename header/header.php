@@ -1,5 +1,8 @@
 <?php
+//Staring the session for using $_ SESSION  built in variable.
 session_start();
+
+//Check user is login or not.
 if(!isset($_SESSION['login'])){
   header('location: ../index.php');
  }
@@ -43,7 +46,7 @@ if(!isset($_SESSION['login'])){
 
   <div class="user">
     <?php
-    echo "Welcome " . $_SESSION['email'];
+    echo "Welcome : " . $_SESSION['UserEmail'];
     ?>
   </div>
 </nav>

@@ -1,25 +1,23 @@
 <?php
+//Starting a session for accessing the session variables.
 session_start();
 
+//Check user is login or not.
 if(!isset($_SESSION['login'])){
   header('location: ../index.php');
  }
 
 //it will include the userInfo class.
 require('../userInformation.php');
+
 //it will include the validation class.
 require('../validation.php');
 
-/**
- * @param string $firstName.
- * @param string $lastName.
- */
+//$firstName, $lastName getting values from $_POST builtin variable.
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 
-/**
- *geting the $_FILES array variale value in the different variable.
- */
+//$fileName, $filePath, $type, $tempName, $size getting values from $_FILES builtin variable.
 $fileName = $_FILES['image']['name'];
 $filePath = $_FILES['image']['full_path'];
 $type = $_FILES['image']['type'];
@@ -41,11 +39,14 @@ if ($validate->checkUserName($firstName, $lastName) === true) {
 
 //check user uploded photo is valid or not.
 if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) === false) {
+  
   //if invalid entry user need to redirect to the form page.
   header('Location: formWithImage.php');
 } else {
   $path = "upload_image/" . $fileName;
   $_SESSION['uploadedImage'] = $path;
+
+  //If uploaded image is valid then send the image upload_image folder.
   move_uploaded_file($tempName, $path);
 }
 
@@ -68,9 +69,11 @@ if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) 
   <div class="info">
     <h1>Hello
       <?php
+      //Printing first and last name of the user using getFirstName() and getLastName() methods.
       echo $user->getFirstName() . " " .  $user->getLastName();
       ?>
     </h1>
+    <!-- Display the uploaded image. -->
     <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
 
   </div>

@@ -1,21 +1,27 @@
 <?php
+//Starting the session for using $_SESSION builtin variable on this page.
 session_start();
 
+//Check user is login or not.
 if(!isset($_SESSION['login'])){
   header('location: ../index.php');
  }
 
-//import the userInfo class.
+//Import the userInfo class.
 require('../userInformation.php');
-//import the checkSubjectMarks class.
+
+//Import the checkSubjectMarks class.
 require('../checkSubjectMarks.php');
-//import the validate class.
+
+//Import the validate class.
 require('../validation.php');
 
+//$firstName,  $lastName, $textArea getting values from $_POST bulitin variable.
 $firstName = $_POST['fname'];
 $lastName = $_POST['lname'];
 $textArea = $_POST['textArea'];
 
+//$textArea, $filePath, $type, $size, $tempName getting values from $_FILES builtin variable.
 $fileName = $_FILES['image']['name'];
 $filePath = $_FILES['image']['full_path'];
 $type = $_FILES['image']['type'];
@@ -28,6 +34,7 @@ if ($validate->checkUserName($firstName, $lastName) === true) {
   //set the session variable.
   $_SESSION['firstName'] = $firstName;
   $_SESSION['lastName'] = $lastName;
+
   //set the data to the user object.
   $user->setFirstName($firstName);
   $user->setLastName($lastName);
@@ -43,9 +50,10 @@ if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) 
 } else {
   $path = "../formWithImage/upload_image/" . $fileName;
   $_SESSION['uploadedImage'] = $path;
+
+  //If the uploaded image is valid then send the image to upload_image folder.
   move_uploaded_file($tempName, $path);
 }
-
 
 ?>
 
@@ -65,32 +73,38 @@ if ($validate->checkUploadedFile($fileName, $tempName, $filePath, $type, $size) 
   <div class="info">
     <h1>Hello
       <?php
+
+      //Printing the values of first name and last name using getFirstName() and getLastName() methods.
       echo $user->getFirstName() . " " . $user->getLastName();
       ?>
     </h1>
+
+    <!-- Display the image of the screen. -->
     <img src="<?php echo $_SESSION['uploadedImage']; ?>" alt="Uploaded File" />
     <div class="file-name">
       <h6>Subject With Marks</h6>
 
       <?php
-      
+
+      //Creating the object of ValidateSubjectMarks class.  
       $valideateSubjectMarks = new ValidateSubjectMarks();
+
+      //Using validateUserInput() method for checking input marks is valid or not.
       if($valideateSubjectMarks->validateUserInput($textArea) === false){
         header('Location: formWithMarks.php');
       }
       
+
       ?>
       <table>
         <tr>
-          <?php
-          $valideateSubjectMarks->getSubject();
-          ?>
+          <!-- Return the subject name. -->
+          <?php $valideateSubjectMarks->getSubject(); ?>
         </tr>
 
         <tr>
-          <?php
-          $valideateSubjectMarks->getMark();
-          ?>
+          <!-- Return the marks of the subject. -->
+          <?php $valideateSubjectMarks->getMark(); ?>
         </tr>
       </table>
     </div>

@@ -1,10 +1,12 @@
 <?php
+//Staring a session for checking user is authorized or not.
 session_start();
-if(!isset($_SESSION['login'])){
-    header('location: ../index.php');
-   }
-?>
 
+//Checking user is login or not.
+if (!isset($_SESSION['login'])) {
+    header('location: ../index.php');
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,20 +22,19 @@ if(!isset($_SESSION['login'])){
     <link rel="stylesheet" href="../style.css">
 </head>
 
-<body style="background-color: black;">
-    <?php
-    require("../header/header.php");
-    ?>
+<body>
+     <!-- Provide the nav bar. -->
+    <?php require("../header/header.php"); ?>
 
     <div class="container">
         <form action="landingPage.php" method="post" enctype="multipart/form-data">
             <!-- First name field -->
             <div class="mb-3">
-                <input type="text"  id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
+                <input type="text" id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
             </div>
             <!-- Last name field -->
             <div class="mb-3">
-                <input type="text"  id="typingLastName" name="lname" placeholder="Last Name" class="form-control" required>
+                <input type="text" id="typingLastName" name="lname" placeholder="Last Name" class="form-control" required>
             </div>
             <!-- full name field -->
             <div class="mb-3">
@@ -65,9 +66,11 @@ if(!isset($_SESSION['login'])){
             <!-- error section -->
             <div class="error">
                 <?php
+                //Check error message is set or not.
                 if (isset($_SESSION['formErrorMsg'])) {
                     $errorMsg = $_SESSION['formErrorMsg'];
                     echo $errorMsg;
+                    //Unset error message because on reload error shoud not displayed on the page.
                     unset($_SESSION['formErrorMsg']);
                 } ?>
             </div>
@@ -75,12 +78,12 @@ if(!isset($_SESSION['login'])){
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-     <!-- jquery cdn -->
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <!-- javascript -->
-  <script src="../form/script.js"></script>
-  <!-- jquery -->
-  <script src="../validation.js"></script>
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <!-- javascript -->
+    <script src="../form/script.js"></script>
+    <!-- jquery -->
+    <script src="../validation.js"></script>
 </body>
 
 </html>

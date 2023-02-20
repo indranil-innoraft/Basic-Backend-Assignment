@@ -1,5 +1,8 @@
 <?php
+//Starting a session for using $_SESSION builtin valriable.
 session_start();
+
+//Check user is login or not.
 if(!isset($_SESSION['login'])){
   header('location: ../index.php');
  }
@@ -19,11 +22,10 @@ if(!isset($_SESSION['login'])){
   <link rel="stylesheet" href="../style.css">
 </head>
 
-<body style="background-color: black;">
-  <?php
-  include("../header/header.php");
+<body>
 
-  ?>
+  <!-- Include the navbar -->
+  <?php include("../header/header.php"); ?>
 
   <div class="container">
     <form action="landingPage.php" method="post" enctype="multipart/form-data">
@@ -63,6 +65,8 @@ if(!isset($_SESSION['login'])){
         if (isset($_SESSION['formErrorMsg'])) {
           $errorMsg = $_SESSION['formErrorMsg'];
           echo $errorMsg;
+          //On reload same error msg should not be displayed on the same page.
+          unset($_SESSION['formErrorMsg']);
         } ?>
       </div>
       <!-- submit button -->

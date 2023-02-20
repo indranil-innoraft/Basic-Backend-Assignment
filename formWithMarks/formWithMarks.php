@@ -1,5 +1,8 @@
 <?php
+//Start a session for using the session variable.
 session_start();
+
+//Check user is login or not.
 if(!isset($_SESSION['login'])){
   header('location: ../index.php');
  }
@@ -52,9 +55,13 @@ if(!isset($_SESSION['login'])){
       <!-- error section -->
       <div class="error">
         <?php
+
+        //Check formErrorMsg is set or not.
         if (isset($_SESSION['formErrorMsg'])) {
           $errorMsg = $_SESSION['formErrorMsg'];
           echo $errorMsg;
+          
+          //After reload error message should not display on the screen.
           unset($_SESSION['formErrorMsg']);
         } ?>
       </div>
