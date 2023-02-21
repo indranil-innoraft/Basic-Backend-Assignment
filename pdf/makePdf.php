@@ -8,7 +8,10 @@ if (!isset($_SESSION['login'])) {
 }
 
 //Provides the FPDF class.
-require('fpdf185/fpdf.php');
+// require('fpdf185/fpdf.php');
+
+//Including the fpdf using composer.
+require_once ('../vendor/autoload.php');
 
 //Provides the subjectMarks class. 
 require('../checkSubjectMarks.php');
