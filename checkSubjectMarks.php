@@ -8,9 +8,12 @@ class ValidateSubjectMarks
    *   store subject array.
    * @var string $Marks
    *   store marks array.
+   * @var string $subjectAndMarksError
+   *   store subject and marks error.
    */
-  private $subjects = [];
-  private $marks = [];
+  public $subjects = [];
+  public $marks = [];
+  public string $subjectAndMarksError;
 
   /**
    * check if enter a valid subject and marks.
@@ -25,7 +28,7 @@ class ValidateSubjectMarks
   {
     //chcek text area is empty or not.
     if(empty($textArea)){
-      $_SESSION['formErrorMsg'] = "field should not be empty.";
+      $this->subjectAndMarksError = "field should not be empty.";
       return false;
     }
     // Seperate the data using enter and store into a array.
@@ -35,7 +38,7 @@ class ValidateSubjectMarks
 
       foreach($rawData as $data){
         if(!strpos($data,'|')){
-          $_SESSION['formErrorMsg'] = "please follow the specified format to enter subject|marks.";
+          $this->subjectAndMarksError = "please follow the specified format to enter subject|marks.";
           return false;
         }
       }
@@ -45,7 +48,7 @@ class ValidateSubjectMarks
         $raw = explode("|", $data);
 
         if(in_array(strtoupper($raw[0]),$this->subjects)){
-          $_SESSION['formErrorMsg'] = "Duplicate subject names are not allowed.";
+          $this->subjectAndMarksError = "Duplicate subject names are not allowed.";
           return false;
         }
 
@@ -53,7 +56,7 @@ class ValidateSubjectMarks
           $this->subjects[$i++] = strtoupper($raw[0]);
         } 
         else {
-          $_SESSION['formErrorMsg'] = "please follow the specified format subject name should be alphabet.";
+          $this->subjectAndMarksError = "please follow the specified format subject name should be alphabet.";
           return false;
         }
 
@@ -61,7 +64,7 @@ class ValidateSubjectMarks
           $this->marks[$j++] = $raw[1];
         } 
         else {
-          $_SESSION['formErrorMsg'] = "please follow the specified format marks should be number";
+          $this->subjectAndMarksError = "please follow the specified format subject name should be alphabet.";
           return false;
         }
 
@@ -77,8 +80,6 @@ class ValidateSubjectMarks
    */
   public function getSubject()
   {
-    //Store the subject array as a string.
-    $_SESSION['subjects'] = implode(" ", $this->subjects);
     foreach ($this->subjects as $data) {
       echo "<td>" . $data . "</td>";
     }
@@ -93,8 +94,6 @@ class ValidateSubjectMarks
    */
   public function getMark()
   {
-    //Store the marks array as a string.
-    $_SESSION['marks'] = implode(" ", $this->marks);
     foreach ($this->marks as $data) {
       echo "<td>" . $data . "</td>";
     }

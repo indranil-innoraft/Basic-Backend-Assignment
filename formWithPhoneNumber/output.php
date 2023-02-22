@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assignment-4 Output</title>
-  <link rel="stylesheet" href="../outputScreenStyle.css">
+  <link rel="stylesheet" href="../css/outputScreenStyle.css">
 
 </head>
 

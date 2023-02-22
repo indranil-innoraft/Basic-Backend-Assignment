@@ -27,6 +27,7 @@ if ($validate->checkUserName($_POST['fname'], $_POST['lname'])) {
   $user->setLastName($_POST['lname']);
 } 
 else {
+  $_SESSION['formErrorMsg']=$validate->nameError;
   header('Location: formWithEmail.php');
 }
 
@@ -39,13 +40,16 @@ if ($validate->checkUploadedFile($_FILES['image']['name'], $_FILES['image']['tmp
   //If uploaded image is valid then transfer to upload_image folder.
   move_uploaded_file($_FILES['image']['tmp_name'], $path);
  
-} else {
+} 
+else {
+  $_SESSION['formErrorMsg']=$validate->uploadedFileError;
    //if invalid entry user need to redirect to the form page.
    header('Location: formWithEmail.php');
 }
 
 //Using validateUserInput() method for checking input marks is valid or not.
 if(!$valideateSubjectMarks->validateUserInput($_POST['textArea'])){
+  $_SESSION['formErrorMsg']=$valideateSubjectMarks->subjectAndMarksError;
   header('Location: formWithEmail.php');
 }
 
@@ -54,6 +58,7 @@ if($validate->checkPhoneNumber($_POST['phNum'])){
   $user->setPhoneNumber($_POST['phNum']);
 }
 else{
+  $_SESSION['formErrorMsg']=$validate->phoneNumberError;
   header("Location:formWithEmail.php");
 }
 

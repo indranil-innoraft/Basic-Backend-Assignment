@@ -25,6 +25,7 @@ if ($validate->checkUserName($_POST['fname'], $_POST['lname'])) {
   $user->setLastName($_POST['lname']);
 } 
 else {
+  $_SESSION['formErrorMsg']=$validate->nameError;
   header('Location: form.php');
 }
 

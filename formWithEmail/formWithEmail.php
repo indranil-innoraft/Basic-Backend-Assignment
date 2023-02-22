@@ -33,7 +33,7 @@
       <!-- upload image field -->
       <div class="mb-3">
         <label for="formFile" class="form-label" style="color: white;">Upload Image</label>
-        <input class="form-control" name="image" type="file" id="formFile" accept="image/png, image/gif, image/jpeg">
+        <input class="form-control" name="image" type="file" id="formFile" accept="image/png, image/gif, image/jpeg" required>
       </div>
       <!-- text area field -->
       <div class="mb-3">

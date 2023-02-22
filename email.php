@@ -7,6 +7,7 @@
  */
 class Email
 {
+
   /**
    * validateEmail method use http://www.mailboxlayer.com/ API to check email-id is valid or not.
    * @access public
@@ -41,16 +42,15 @@ class Email
 
       //Converting JSON to Array.
       $validationResult = json_decode($response, true);
+      curl_close($curl);
 
       //if SMTP and format_valid return true it means email-id is valid.
       if ($validationResult['format_valid'] && $validationResult['smtp_check']) {
-        $_SESSION['emailId'] = $email_address;
         return true;
       } 
       else {
         return false;
       }
-      curl_close($curl);
     }
   }
 }

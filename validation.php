@@ -1,7 +1,18 @@
 <?php
 
 class Validation
-{
+{ 
+  /**
+   * Variables to store errors.
+   *
+   * @var string $nameError
+   * @var string $uploadedFileError
+   * @var string $phoneNumberError
+   */
+  public string $nameError;
+  public string $uploadedFileError;
+  public string $phoneNumberError;
+
   /**
    * @method boolean checkUserName()
    *   check user enter a valid name or not.
@@ -12,15 +23,19 @@ class Validation
   public function checkUserName($firstName, $lastName)
   {
     if (empty($firstName) || empty($lastName)) {
-      $_SESSION['formErrorMsg'] = "Name should not be empty.";
+      $this->nameError="Name should not be empty.";
       return False;
-    } else if (preg_match('/[0-9]/', $firstName) || preg_match('/[0-9]/', $lastName)) {
-      $_SESSION['formErrorMsg'] = "Name should be contain alphabet.";
+    } 
+    elseif (preg_match('/[0-9]/', $firstName) || preg_match('/[0-9]/', $lastName)) {
+      $this->nameError="Name should be contain alphabet.";
+
       return False;
-    } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
-      $_SESSION['formErrorMsg'] = "Name should not contain special character.";
+    } 
+    elseif (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
+      $this->nameError="Name should not contain special character.";
       return False;
-    } else {
+    } 
+    else {
       return true;
     }
   }
@@ -28,21 +43,18 @@ class Validation
   function checkUploadedFile($fileName, $tempName, $filePath, $type, $size)
   {
     if (isset($fileName)) {
-      if (
-        $type != "image/png"
-        && $type != "image/jpeg"
-        && $type != "image/jpg"
-      ) {
-        $_SESSION['formErrorMsg'] = "please upload a image(jpeg,png or png).";
+      if ( $type != "image/png"  && $type != "image/jpeg"  && $type != "image/jpg") {
+        $this->uploadedFileError = "please upload a image(jpeg,png or png).";
         return False;
       }
       if ($size > 6291456) {
-        $_SESSION['formErrorMsg'] = "please upload a image less then 6MB";
+        $this->uploadedFileError = "please upload a image(jpeg,png or png).";
         return False;
       }
       return true;
-    } else {
-      $_SESSION['formErrorMsg'] = "please upload a image";
+    } 
+    else {
+      $this->uploadedFileError = "please upload a image(jpeg,png or png).";
       return False;
     }
   }
@@ -58,15 +70,14 @@ class Validation
   {
 
     if (empty($phoneNo)) {
-      $_SESSION['formErrorMsg'] = "field should not be empty.";
+      $this->phoneNumberError = "field should not be empty.";
       return false;
     } 
     else if (strlen($phoneNo) < 10 || strlen($phoneNo) > 10) {
-      $_SESSION['formErrorMsg'] = "not valid number";
+      $this->phoneNumberError = "field should not be empty.";
       return false;
     } 
     else {
-      $_SESSION['phone'] = $phoneNo;
       return true;
     }
   }

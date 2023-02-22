@@ -20,6 +20,7 @@ if ($validate->checkUserName($_POST['fname'], $_POST['lname'])) {
   $user->setLastName($_POST['lname']);
 } 
 else {
+  $_SESSION['formErrorMsg']=$validate->nameError;
   //if invalid entry user need to redirect to the form page.
   header('Location: formWithImage.php');
 }
@@ -32,6 +33,7 @@ if ($validate->checkUploadedFile($_FILES['image']['name'], $_FILES['image']['tmp
   move_uploaded_file($_FILES['image']['tmp_name'], $path);
   } 
   else {
+    $_SESSION['formErrorMsg']=$validate->uploadedFileError;
     //if invalid entry user need to redirect to the form page.
     header('Location: formWithImage.php');
 }

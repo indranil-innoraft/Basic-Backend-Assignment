@@ -26,6 +26,7 @@ if ($validate->checkUserName($_POST['fname'], $_POST['lname'])) {
   $user->setLastName($_POST['lname']);
 } 
 else {
+  $_SESSION['formErrorMsg']=$validate->nameError;
   header('Location: compleForm.php');
 }
 
@@ -37,20 +38,28 @@ if ($validate->checkUploadedFile($_FILES['image']['name'], $_FILES['image']['tmp
   move_uploaded_file($_FILES['image']['tmp_name'], $path);
 }
  else {
+  $_SESSION['formErrorMsg']=$validate->uploadedFileError;
   //if invalid entry user need to redirect to the form page.
   header('Location: compleForm.php');
 }
 
 //Check subject and marks of the user is valid or not using validateUserInput() method.
 if (!$valideateSubjectMarks->validateUserInput($_POST['textArea'])) {
+  $_SESSION['formErrorMsg']=$valideateSubjectMarks->subjectAndMarksError;
   header('Location: compleForm.php');
+}
+else {
+  $_SESSION['subjects'] = implode(" ", $valideateSubjectMarks->subjects);
+  $_SESSION['marks'] = implode(" ", $valideateSubjectMarks->marks);
 }
 
 //check phone number.
 if($validate->checkPhoneNumber($_POST['phNum'])){
+  $_SESSION['phone']=$_POST['phNum'];
   $user->setPhoneNumber($_POST['phNum']);
 }
 else{
+  $_SESSION['formErrorMsg']=$validate->phoneNumberError;
   header("Location:compleForm.php");
 }
 
@@ -61,7 +70,6 @@ if ($emailFetch->validateEmail($_POST['email'])) {
   $user->setEmailId($_POST['email']);
 } 
 else {
-
   $_SESSION['formErrorMsg'] = "email is not valid.";
   header("Location: compleForm.php");
 
