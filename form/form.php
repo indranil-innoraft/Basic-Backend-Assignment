@@ -6,20 +6,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Assignment-2</title>
-  <!-- bootstrap cdn link  -->
+  <title>Assignment-1</title>
+  <!-- bootstrap cdn -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-  <!-- local css  -->
+  <!-- local css file -->
   <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-  <!-- Provides the navbar. -->
-  <?php require("../header/header.php"); ?>
+
+  <!-- This will include the nav bar. -->
+  <?php require('../header/header.php'); ?>
 
   <div class="container">
-
-    <form action="output.php" method="post" enctype="multipart/form-data">
+    <form action="output.php" method="post">
       <!-- First name field -->
       <div class="mb-3">
         <input type="text" id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
@@ -32,34 +32,30 @@
       <div class="mb-3">
         <input type="text" name="lname" id="target" placeholder="Full Name" class="form-control" disabled>
       </div>
-      <!-- upload image field -->
-      <div class="mb-3">
-        <label for="formFile" class="form-label" style="color: white;" >Upload Image</label>
-        <input class="form-control" name="image" type="file" id="formFile" accept="image/png, image/gif, image/jpeg">
-      </div>
       <!-- error section -->
       <div class="error">
 
         <?php
         //Start session for using $_SESSION bulitin variable.
         session_start();
-        //Check formErrorMsg is set or not.
+
+        //If some error occur after submitting the form its show the error message this area.
         if (isset($_SESSION['formErrorMsg'])) {
           echo $_SESSION['formErrorMsg'];
-
-          //If page gets reload the value need to reset.
+          //After reload the page it shouldn't show the same error.
           unset($_SESSION['formErrorMsg']);
-        } 
-        
+        }
+
         ?>
+
       </div>
       <!-- submit button -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-   <!-- jquery cdn -->
-   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <!-- javascript -->
+  <!-- jquery cdn -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <!-- javascript link -->
   <script src="../script/script.js"></script>
   <script src="../script/validation.js"></script>
 </body>

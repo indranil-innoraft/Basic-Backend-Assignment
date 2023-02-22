@@ -1,35 +1,53 @@
 <?php
-
-
-//$userEmail variable getting value from POST built-in variable.
-//$userPassword variable getting value from POST built-in variable.
-$userEmail = $_POST['email'];
-$userPassword = $_POST['password'];
-
 /**
- * Validation function if user is valid or not.
- * @param string $userEmail.
- * @param string $userPassword.
+ * This class contains multiple methods for user validation related operation.
  * 
- * @return void
- * 
+ * @method isValid().
+ *   check user is already registered.
  */
+class ValidateUser {
+  
+  /**
+   * @var string $userEmail
+   *   store user emailId.
+   * @var string $userPassword
+   *   store user password.
+   */
 
-function validation($userEmail, $userPassword)
-{
-  if ($userEmail === 'indranil.roy@innoraft.com' && $userPassword === 'innoraft') {
-    session_start();
-    $_SESSION['login'] = true;
-    // set user name 
-    $_SESSION['name'] = "Indranil Roy";
-    // set user email address.
-    $_SESSION['UserEmail'] = "indranil.roy@innoraft.com";
-    header('Location: home/home.php');
-  } else {
-    $_SESSION['userValidateError'] = "invalid cradential,please try again.";
-    header('Location: index.php');
+  private string $userEmail;
+  private string $userPassword;
+
+  /**
+   * Constructor function.
+   * @param string $userEmail
+   * @param string $userPassword
+   * 
+   * @return void
+   * 
+   */
+
+  public function __construct(string $userEmail, string $userPassword)
+  {
+
+    $this->userEmail = $userEmail;
+    $this->userPassword = $userPassword;
+  }
+
+  /**
+   * Validate user details.
+   * 
+   * @return boolean
+   */
+
+  public function isValid()
+  {
+    if ($this->userEmail === "indranil.roy@innoraft.com" 
+    && $this->userPassword === "innoraft") {
+      return true;
+    } 
+    
+    else {
+      return false;
+    }
   }
 }
-
-//call the validation function.
-validation($userEmail, $userPassword);

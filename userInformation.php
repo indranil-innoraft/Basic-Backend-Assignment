@@ -1,5 +1,4 @@
 <?php
-session_start();
 /**
  * Store user related information using setter and getter methods.
  * 
@@ -64,6 +63,7 @@ class UserInfo
    *
    * @return string
    */
+
   function getPhoneNumber()
   {
     return $this->phoneNo;
@@ -116,5 +116,3 @@ class UserInfo
     $this->emailId = $emailId;
   }
 }
-
-$user = new UserInfo();

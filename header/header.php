@@ -18,7 +18,7 @@ if(!isset($_SESSION['login'])){
         <a class="nav-link" href="../home/home.php">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../form/login.php">Form</a>
+        <a class="nav-link" href="../form/form.php">Form</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../formWithImage/formWithImage.php">Form with Image</a>

@@ -1,3 +1,4 @@
 vendor/
+formWithImage/upload_image/
 *.json
 *.lock

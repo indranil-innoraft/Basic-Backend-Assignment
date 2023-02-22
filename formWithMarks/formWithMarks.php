@@ -1,13 +1,3 @@
-<?php
-//Start a session for using the session variable.
-session_start();
-
-//Check user is login or not.
-if(!isset($_SESSION['login'])){
-  header('location: ../index.php');
- }
-
- ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,17 +10,16 @@ if(!isset($_SESSION['login'])){
   <!-- bootstrap cdn link  -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <!-- local css  -->
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body style="background-color: black;">
-  <?php
-  require("../header/header.php");
-
-  ?>
+<body>
+  
+  <!-- Include navbar. -->
+  <?php require("../header/header.php"); ?>
 
   <div class="container">
-    <form action="landingPage.php" method="post" enctype="multipart/form-data">
+    <form action="output.php" method="post" enctype="multipart/form-data">
       <!-- First name field -->
       <div class="mb-3">
         <input type="text"  id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
@@ -55,22 +44,23 @@ if(!isset($_SESSION['login'])){
       <!-- error section -->
       <div class="error">
         <?php
-
+        
+        //Starting session variable for using $_SESSION builtin variable.
+         session_start();
         //Check formErrorMsg is set or not.
         if (isset($_SESSION['formErrorMsg'])) {
-          $errorMsg = $_SESSION['formErrorMsg'];
-          echo $errorMsg;
-          
+          echo $_SESSION['formErrorMsg'];
           //After reload error message should not display on the screen.
           unset($_SESSION['formErrorMsg']);
-        } ?>
+        } 
+        
+        ?>
       </div>
       <!-- submit button -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-  <script src="../form/script.js"></script>
-
+  <script src="../script/script.js"></script>
+  <script src="../script/validation.js"></script>
 </body>
-
 </html>

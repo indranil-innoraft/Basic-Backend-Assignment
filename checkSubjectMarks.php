@@ -1,6 +1,5 @@
 
 <?php
-session_start();
 
 class ValidateSubjectMarks
 {
@@ -40,16 +39,24 @@ class ValidateSubjectMarks
           return false;
         }
       }
+
       //Iterate over the array and seperate the subject and marks.
       foreach ($rawData as $data) {
         $raw = explode("|", $data);
+
+        if(in_array(strtoupper($raw[0]),$this->subjects)){
+          $_SESSION['formErrorMsg'] = "Duplicate subject names are not allowed.";
+          return false;
+        }
+
         if (preg_match('/[a-zA-Z]/', $raw[0])) {
-          $this->subjects[$i++] = $raw[0];
+          $this->subjects[$i++] = strtoupper($raw[0]);
         } 
         else {
           $_SESSION['formErrorMsg'] = "please follow the specified format subject name should be alphabet.";
           return false;
         }
+
         if (preg_match('/[0-9]/', $raw[1]) && $raw[1]<100 && $raw[1]>0) {
           $this->marks[$j++] = $raw[1];
         } 
@@ -57,6 +64,7 @@ class ValidateSubjectMarks
           $_SESSION['formErrorMsg'] = "please follow the specified format marks should be number";
           return false;
         }
+
       }
       return true;
   }

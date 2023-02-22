@@ -1,13 +1,3 @@
-<?php
-//Start the session for using $_SESSION builtin variable.
-session_start();
-
-//Check user is login or not.
-if (!isset($_SESSION['login'])) {
-  header('location: ../index.php');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +9,7 @@ if (!isset($_SESSION['login'])) {
   <!-- bootstrap cdn link  -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
   <!-- local css  -->
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -27,7 +17,7 @@ if (!isset($_SESSION['login'])) {
   <?php require("../header/header.php"); ?>
 
   <div class="container">
-    <form action="landingPage.php" method="post" enctype="multipart/form-data">
+    <form action="output.php" method="post" enctype="multipart/form-data">
       <!-- First name field -->
       <div class="mb-3">
         <input type="text" id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
@@ -65,14 +55,19 @@ if (!isset($_SESSION['login'])) {
       </div>
       <!-- error section -->
       <div class="error">
+
         <?php
+
+        //Start the session for using $_SESSION builtin variable.
+        session_start();
         //Check formErrorMsg is set or not.
         if (isset($_SESSION['formErrorMsg'])) {
-          $errorMsg = $_SESSION['formErrorMsg'];
-          echo $errorMsg;
+          echo $_SESSION['formErrorMsg'];
           //On reload error should not displayed.
           unset($_SESSION['formErrorMsg']);
-        } ?>
+        }
+
+        ?>
       </div>
       <!-- submit button -->
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -81,9 +76,8 @@ if (!isset($_SESSION['login'])) {
 
   <!-- jquery cdn -->
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <!-- jquery -->
-  <script src="../validation.js"></script>
-  <script src="../form/script.js"></script>
+  <!-- javascript -->
+  <script src="../script/validation.js"></script>
+  <script src="../script/script.js"></script>
 </body>
-
 </html>

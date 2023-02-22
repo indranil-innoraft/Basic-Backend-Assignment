@@ -1,0 +1,33 @@
+.container{
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 800px;
+}
+
+body{
+  background-color: black;
+}
+
+form > div {
+  margin: 10px 0px;
+}
+
+input{
+  border: 1px solid skyblue;
+}
+
+.error{
+  color: red;
+}
+
+.Num{
+  display: flex;
+}
+
+
+
+

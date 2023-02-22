@@ -1,7 +1,4 @@
 <?php
-//sessiion start
-session_start();
-
 
 class Validation
 {
@@ -74,5 +71,3 @@ class Validation
     }
   }
 }
-
-$validate = new Validation();

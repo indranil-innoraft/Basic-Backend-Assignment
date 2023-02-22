@@ -2,6 +2,7 @@
 <?php
 session_start();
 
+//Check user is login or not.
 if (!isset($_SESSION['login'])) {
   header('location: ../index.php');
 }
@@ -9,7 +10,7 @@ if (!isset($_SESSION['login'])) {
 //This will redirect the page based on question number.
 switch ($_GET['q']) {
   case 1:
-    header('Location: ../form/login.php');
+    header('Location: ../form/form.php');
     break;
   case 2:
     header('Location: ../formWithImage/formWithImage.php');
