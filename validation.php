@@ -113,7 +113,7 @@ class Validation
         return true;
       }
        else {
-        $this->emailError = "Email is not valid.not";
+        $this->emailError = "Email is not valid.";
         return false;
       }
     }
