@@ -4,6 +4,9 @@ session_start();
 
 require ('../vendor/autoload.php');
 
+//Provides the function for email validation using Guzzle.
+require ('../guzzleEmailValidate.php');
+
 //Creating Validation class object for validation.
 $validate = new Validation();
 
@@ -14,7 +17,7 @@ $user = new UserInfo();
 $valideateSubjectMarks = new ValidateSubjectMarks();
 
 //Creating the object of Email class.
-$emailFetch = new Email();
+// $emailFetch = new Email();
 
 //Check using checkUserName() method the user name is valid or not.
 if ($validate->checkUserName($_POST['fname'], $_POST['lname'])) {
@@ -63,16 +66,26 @@ else{
   header("Location:compleForm.php");
 }
 
-//Using validateEmail() method for checking user enter a valid email-id or not.
-if ($emailFetch->validateEmail($_POST['email'])) {
-  $_SESSION['email'] = $_POST['email'];
-  //Set the email-id for the user.
-  $user->setEmailId($_POST['email']);
-} 
+// //Using validateEmail() method for checking user enter a valid email-id or not.
+// if ($emailFetch->validateEmail($_POST['email'])) {
+//   $_SESSION['email'] = $_POST['email'];
+//   //Set the email-id for the user.
+//   $user->setEmailId($_POST['email']);
+// } 
+// else {
+//   $_SESSION['formErrorMsg'] = "email is not valid.";
+//   header("Location: compleForm.php");
+
+// }
+
+//Validate using guzzleEmailValidate method.
+if(guzzleEmailValidate($_POST['email'])) {
+  $_SESSION['email'] =  $_POST['email']; 
+  $user->setEmailId( $_POST['email']);
+}
 else {
   $_SESSION['formErrorMsg'] = "email is not valid.";
-  header("Location: compleForm.php");
-
+  header("Location:compleForm.php");
 }
 
 ?>

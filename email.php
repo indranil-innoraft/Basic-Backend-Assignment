@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Check SMTP on user entered email-id.
  * @author Indranil Roy
@@ -18,8 +19,8 @@ class Email
     // Check field is empty or not.
     if (empty($email_address)) {
       return false;
-    } 
-    else {
+    } else {
+
       //curl is having a branch of protocols that helps to request.
       $curl = curl_init();
       curl_setopt_array($curl, array(
