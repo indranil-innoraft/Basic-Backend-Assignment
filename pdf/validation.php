@@ -4,9 +4,6 @@ session_start();
 
 require ('../vendor/autoload.php');
 
-//Provides the function for email validation using Guzzle.
-require ('../guzzleEmailValidate.php');
-
 //Creating Validation class object for validation.
 $validate = new Validation();
 
@@ -78,13 +75,13 @@ else{
 
 // }
 
-//Validate using guzzleEmailValidate method.
-if(guzzleEmailValidate($_POST['email'])) {
+//Using isValidEmail() methods check email id is valid or not.
+if($validate->isValidEmail($_POST['email'])) {
   $_SESSION['email'] =  $_POST['email']; 
   $user->setEmailId( $_POST['email']);
 }
 else {
-  $_SESSION['formErrorMsg'] = "email is not valid.";
+  $_SESSION['formErrorMsg'] = $validate->emailError;
   header("Location:compleForm.php");
 }
 

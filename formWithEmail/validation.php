@@ -1,11 +1,10 @@
 <?php
 //Start the for using $_SESSION builtin variable.
 session_start();
-
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 require ('../vendor/autoload.php');
-
-//Provides the function for email varification.
-require ('../guzzleEmailValidate.php');
 
 //Creating Validation class object for validation.
 $validate = new Validation();
@@ -74,13 +73,13 @@ else{
 //   header("Location:formWithEmail.php");
 // }
 
-//Validate using guzzleEmailValidate method.
-if(guzzleEmailValidate($_POST['email'])) {
+//Using isValidEmail() method check email is valid or not.
+if($validate->isValidEmail($_POST['email'])) {
   $_SESSION['email'] =  $_POST['email']; 
   $user->setEmailId( $_POST['email']);
 }
 else {
-  $_SESSION['formErrorMsg'] = "email is not valid.";
+  $_SESSION['formErrorMsg'] = $validate->emailError;
   header("Location:formWithEmail.php");
 }
 
