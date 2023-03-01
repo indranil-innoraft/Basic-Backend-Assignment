@@ -1,3 +1,7 @@
+:root {
+  --green:green;
+}
+
 .container{
   width: 100%;
   max-width: 1180px;
@@ -28,6 +32,32 @@ input{
   display: flex;
 }
 
+.sign-up {
+  float: right;
+  background-color: var(--green); 
+  border-color: var(--green);
+}
 
+.sign-up:hover {
+  background-color: var(--green);
+  border-color: var(--green);
+  filter: brightness(1.2);
+}
 
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+p {
+  color: white;
+}
+
+form {
+  width: 500px;
+}
+
+.title {
+  color:skyblue;
+}

@@ -9,12 +9,14 @@ class Validation
    * @var string $uploadedFileError
    * @var string $phoneNumberError
    * @var string $emailError
+   * @var string $passwordError
    * 
    */
   public string $nameError;
   public string $uploadedFileError;
   public string $phoneNumberError;
   public string $emailError;
+  public string $passwordError;
 
   /**
    * @method boolean checkUserName()
@@ -91,7 +93,7 @@ class Validation
       $this->emailError = "Email field should not be empty.";
       return false;
     } else {
-      require ('../vendor/autoload.php');
+      require('../vendor/autoload.php');
 
       // Create a client with a base URI
       $client = new GuzzleHttp\Client([
@@ -100,7 +102,7 @@ class Validation
 
       $response = $client->request('GET', "/email_verification/check?email=" . $emailAddress, [
         "headers" => [
-          'Content-Type'=> 'text/plain',
+          'Content-Type' => 'text/plain',
           'apikey' => 'STTONsCShOh5qIQFmndLNgiz3nfgFRN9'
         ]
       ]);
@@ -111,11 +113,26 @@ class Validation
       $arr_body = json_decode($body);
       if ($arr_body->format_valid && $arr_body->smtp_check) {
         return true;
-      }
-       else {
+      } else {
         $this->emailError = "Email is not valid.";
         return false;
       }
+    }
+  }
+
+  public function isValidPassword(string $password) {
+    // Validate password strength
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+
+    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+      $this->passwordError = 'Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.';
+      return false;
+    } 
+    else {
+      return true;
     }
   }
 }
