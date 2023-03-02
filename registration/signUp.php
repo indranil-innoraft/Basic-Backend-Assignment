@@ -17,24 +17,10 @@
     <div class="title">
       <h4>Sign Up</h4>
     </div>
-    <!-- First name field -->
-    <div class="mb-3">
-      <input type="text" id="typingFirstName" name="fname" class="form-control " placeholder="First Name" required>
-    </div>
-
-    <!-- Last name field -->
-    <div class="mb-3">
-      <input type="text" id="typingLastName" name="lname" placeholder="Last Name" class="form-control" required>
-    </div>
-
-    <!-- Phone Number -->
-    <div class="input_num">
-      <input type="text" class=" form-control" name="phNum" id="ec-mobile-number" aria-describedby="emailHelp" placeholder="Phone no" maxlength="15" aria-row="10" value="" required />
-    </div>
 
     <!-- email id field -->
     <div class="form-group">
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email" required>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email as user name" required>
     </div>
 
     <!-- password field-->

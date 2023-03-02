@@ -14,6 +14,9 @@ if(!isset($_SESSION['login'])){
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="https://github.com/indranil-innoraft/Basic-Backend-Assignment">Git Hub</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="../home/home.php">Home</a>
       </li>

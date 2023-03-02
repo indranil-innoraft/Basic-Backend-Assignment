@@ -1,0 +1,16 @@
+{
+    "autoload": {
+        "classmap": [
+            "userInformation.php",
+            "validation.php",
+            "checkSubjectMarks.php",
+            "email.php",
+            "userValidation.php"
+        ]
+    },
+    "require": {
+        "setasign/fpdf": "^1.8",
+        "guzzlehttp/guzzle": "^7.5",
+        "phpmailer/phpmailer": "^6.7"
+    }
+}

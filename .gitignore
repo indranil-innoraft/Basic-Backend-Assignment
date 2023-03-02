@@ -1,5 +1,4 @@
 vendor/
 formWithImage/upload_image/
-*.json
-*.lock
 forgetPassword/confidential.php
+database/connection.php

@@ -19,7 +19,7 @@
     <!-- login form -->
     <form action="validateLogin.php" method="post">
       <div class="title">
-        <h4>Login In</h4>
+        <h4>Log In</h4>
       </div>
       <!-- email id field -->
       <div class="form-group">
@@ -35,6 +35,7 @@
       <div class="error">
 
         <?php
+
         session_start();
 
         if (isset($_SESSION['userValidateError'])) {
@@ -58,11 +59,12 @@
 
       </div>
 
-      <!-- submit button -->
+      <!-- log in button -->
       <button type="submit" name="login-btn" class="btn btn-primary">Log In</button>
 
       <!-- Sign up button -->
       <button type="submit" name="register" class="btn btn-primary sign-up">Sign Up</button>
+      
       <div class="form-bottm-section">
         <p>if you don't remember your password,<a href="./forgetPassword/index.php">Forget Password</a></p>
       </div>

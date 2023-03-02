@@ -10,4 +10,3 @@ function liveTyping(){
 
 document.getElementById('typingFirstName').addEventListener("keyup",liveTyping);
 document.getElementById('typingLastName').addEventListener("keyup",liveTyping);
-

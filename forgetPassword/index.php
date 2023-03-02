@@ -35,6 +35,9 @@
       }
       ?>
       </div>
+      <div class="form-bottm-section">
+        <p><a href="../index.php">Go Back</a></p>
+    </div>
     </form>
   </div>
 </body>

@@ -1,9 +1,7 @@
 <?php
 //Start the for using $_SESSION builtin variable.
 session_start();
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
+
 require ('../vendor/autoload.php');
 
 //Creating Validation class object for validation.

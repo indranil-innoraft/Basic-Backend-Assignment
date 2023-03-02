@@ -1,49 +1,90 @@
 <?php
 
-class Validation
-{
+class Validation {
+  
   /**
-   * Variables to store errors.
+   * Store name error related information.
    *
-   * @var string $nameError
-   * @var string $uploadedFileError
-   * @var string $phoneNumberError
-   * @var string $emailError
-   * @var string $passwordError
-   * 
+   * @var string
    */
+
   public string $nameError;
+
+  /**
+   * Store uploaded file error related information.
+   *
+   * @var string
+   */
+
   public string $uploadedFileError;
+
+  /**
+   * Store Phone number error related information.
+   *
+   * @var string
+   */
+
   public string $phoneNumberError;
+
+  /**
+   * Store email error related information.
+   *
+   * @var string
+   */
+
   public string $emailError;
+
+  /**
+   * Store password error related information.
+   *
+   * @var string
+   */
+
   public string $passwordError;
 
   /**
-   * @method boolean checkUserName()
-   *   check user enter a valid name or not.
-   * @method boolean checkUpLoadedFile().
-   *   check user upload a valid image or not.
+   * Validate user first and last name.
+   *
+   * @param string $firstName
+   * @param string $lastName
+   * 
+   * @return boolean
+   * 
    */
 
-  public function checkUserName($firstName, $lastName)
-  {
+  public function checkUserName(string $firstName, string $lastName) {
     if (empty($firstName) || empty($lastName)) {
       $this->nameError = "Name should not be empty.";
       return False;
-    } elseif (preg_match('/[0-9]/', $firstName) || preg_match('/[0-9]/', $lastName)) {
+    } 
+    else if (preg_match('/[0-9]/', $firstName) || preg_match('/[0-9]/', $lastName)) {
       $this->nameError = "Name should be contain alphabet.";
-
       return False;
-    } elseif (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
+    } 
+    else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $firstName) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $lastName)) {
       $this->nameError = "Name should not contain special character.";
       return False;
-    } else {
+    } 
+    else {
       return true;
     }
   }
 
-  function checkUploadedFile($fileName, $tempName, $filePath, $type, $size)
-  {
+ 
+  /**
+   * Validate user uploaded file.
+   *
+   * @param string $fileName
+   * @param string $tempName
+   * @param string $filePath
+   * @param string $type
+   * @param string $size
+   * 
+   * @return boolean
+   * 
+   */
+
+  function checkUploadedFile(string $fileName, string $tempName, string $filePath, string $type, string $size) {
     if (isset($fileName)) {
       if ($type != "image/png"  && $type != "image/jpeg"  && $type != "image/jpg") {
         $this->uploadedFileError = "please upload a image(jpeg,png or png).";
@@ -54,45 +95,51 @@ class Validation
         return False;
       }
       return true;
-    } else {
+    } 
+    else {
       $this->uploadedFileError = "please upload a image(jpeg,png or png).";
       return False;
     }
   }
 
-
   /**
-   * check if the user input a correct phone number or not. 
+   * check if the user input a correct phone number or not.
    *
-   * @param string $phoneNo.
-   * @return boolean.
+   * @param string $phoneNo
+   * 
+   * @return boolean
+   * 
    */
-  public function checkPhoneNumber(string $phoneNo)
-  {
 
+  public function checkPhoneNumber(string $phoneNo) {
     if (empty($phoneNo)) {
       $this->phoneNumberError = "field should not be empty.";
       return false;
-    } else if (strlen($phoneNo) < 10 || strlen($phoneNo) > 10) {
+    } 
+    else if (strlen($phoneNo) < 10 || strlen($phoneNo) > 10) {
       $this->phoneNumberError = "field should not be empty.";
       return false;
-    } else {
+    } 
+    else {
       return true;
     }
   }
 
   /**
-   * Check email is valid or not.
+   * Validate user email address.
    *
    * @param string $emailAddress
+   * 
    * @return boolean
+   * 
    */
-  public function isValidEmail(string $emailAddress)
-  {
+
+  public function isValidEmail(string $emailAddress) {
     if (empty($emailAddress)) {
       $this->emailError = "Email field should not be empty.";
       return false;
-    } else {
+    } 
+    else {
       require('../vendor/autoload.php');
 
       // Create a client with a base URI
@@ -113,18 +160,28 @@ class Validation
       $arr_body = json_decode($body);
       if ($arr_body->format_valid && $arr_body->smtp_check) {
         return true;
-      } else {
+      } 
+      else {
         $this->emailError = "Email is not valid.";
         return false;
       }
     }
   }
 
+  /**
+   * Validate user enter password.
+   *
+   * @param string $password
+   * 
+   * @return boolean
+   * 
+   */
+
   public function isValidPassword(string $password) {
     // Validate password strength
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
-    $number    = preg_match('@[0-9]@', $password);
+    $number = preg_match('@[0-9]@', $password);
     $specialChars = preg_match('@[^\w]@', $password);
 
     if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
