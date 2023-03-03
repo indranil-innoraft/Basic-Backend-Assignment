@@ -34,7 +34,6 @@ else {
     $_SESSION['formErrorMsg'] = "Account already exits.";
     header('Location: signUp.php');
   }
-
 }
 
 ?>

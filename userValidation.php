@@ -3,7 +3,7 @@
  * This class contains multiple methods for user validation related operation.
  * 
  * @method isValid().
- *   check user is already registered.
+ *   Check user is already registered.
  */
 class ValidateUser {
   
@@ -19,7 +19,9 @@ class ValidateUser {
 
   /**
    * Constructor function.
+   * 
    * @param string $userEmail
+   *  
    * @param string $userPassword
    * 
    * @return void
@@ -28,7 +30,6 @@ class ValidateUser {
 
   public function __construct(string $userEmail, string $userPassword)
   {
-
     $this->userEmail = $userEmail;
     $this->userPassword = $userPassword;
   }

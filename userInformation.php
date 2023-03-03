@@ -20,31 +20,47 @@
  *   Set phone number of the user.
  */
 
-class UserInfo
-{
+class UserInfo {
   /**
-   * @global String $firstName
-   *   Store user first name.
-   * @global String $lastName
-   *   Store user last name.
-   * @global String $phoneNo
-   *   Store user phone number.
-   * @global String $emailId
-   *   Store user email id.
+   * Store user first name.
+   *
+   * @var string
    */
 
   private string $firstName;
+
+  /**
+   * Srote user last name.
+   *
+   * @var string
+   */
+
   private string $lastName;
+
+  /**
+   * Store user phone number.
+   *
+   * @var string
+   */
+
   private string $phoneNo;
+
+  /**
+   * Store user email id.
+   *
+   * @var string
+   */
+
   private string $emailId;
 
   /**
    * Get the value of the firstName.
    *
    * @return string
+   * 
    */
-  public function getFirstName()
-  {
+ 
+  public function getFirstName() {
     return $this->firstName;
   }
 
@@ -52,9 +68,10 @@ class UserInfo
    * Get the value of the lastName.
    *
    * @return string
+   * 
    */
-  public function getLastName()
-  {
+
+  public function getLastName() {
     return $this->lastName;
   }
 
@@ -62,10 +79,10 @@ class UserInfo
    * Get the value of the phone number.
    *
    * @return string
+   * 
    */
 
-  function getPhoneNumber()
-  {
+  function getPhoneNumber() {
     return $this->phoneNo;
   }
 
@@ -73,46 +90,54 @@ class UserInfo
    * Get the value of the emailId.
    *
    * @return string
+   * 
    */
-  function getEmailId()
-  {
+
+  function getEmailId() {
     return $this->emailId;
   }
 
   /**
    * Set the value of the firstName.
+   * 
    * @param string $firstName.
+   * 
    */
-  public function setFirstName(string $firstName)
-  {
+
+  public function setFirstName(string $firstName) {
     $this->firstName = $firstName;
   }
 
   /**
    * Set the value of the lastName.
+   * 
    * @param string $lastName.
+   * 
    */
-  public function setLastName(string $lastName)
-  {
 
+  public function setLastName(string $lastName) {
     $this->lastName = $lastName;
   }
 
   /**
    * Set the value of the phone number.
+   * 
    * @param string $phoneNo.
+   * 
    */
-  public function setPhoneNumber(string $phoneNo)
-  {
+
+  public function setPhoneNumber(string $phoneNo) {
     $this->phoneNo = $phoneNo;
   }
 
   /**
    * Set the value of the emailId.
+   * 
    * @param string $emailId.
+   * 
    */
-  function setEmailId(string $emailId)
-  {
+
+  function setEmailId(string $emailId) {
     $this->emailId = $emailId;
   }
 }

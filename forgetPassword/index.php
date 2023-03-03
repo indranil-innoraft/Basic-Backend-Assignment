@@ -13,7 +13,7 @@
 
 <body>
   <div class="container">
-    <form action="resetPassword.php" method="post">
+    <form action="generateOTP.php" method="post">
     <div class="title">
       <h4>Generate OTP</h4>
     </div>

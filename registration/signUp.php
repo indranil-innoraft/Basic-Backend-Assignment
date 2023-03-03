@@ -14,6 +14,7 @@
 <div class="container">
   <!-- Register form -->
   <form action="registerUser.php" method="post">
+
     <div class="title">
       <h4>Sign Up</h4>
     </div>
@@ -32,10 +33,10 @@
     <div class="error">
 
       <?php
+
       session_start();
 
       if (isset($_SESSION['formErrorMsg'])) {
-
         echo $_SESSION['formErrorMsg'];
         //On reload error should not be displayed on screen.
         unset($_SESSION['formErrorMsg']);
@@ -55,8 +56,6 @@
   </form>
 
 </div>
-
 <body>
 </body>
-
 </html>

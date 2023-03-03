@@ -1,9 +1,19 @@
 <?php
-
-class db extends mysqli
-{
+/**
+ * Provides the methods like insert data, data already exists.
+ * 
+ * @method boolean pushIntoDataBase()
+ *   Push a new row to the database.
+ * @method boolean isExists()
+ *   Check user email id already present in the database or not.
+ * @method boolean setPassword()
+ *   Update the user password.
+ * @method boolean isValid()
+ *   Check user email and and password already present in the database or not.
+ */
+class db extends mysqli {
   /**
-   * Creat a new user row.
+   * Creat a new user row in the database.
    *
    * @param string $email
    * @param string $password

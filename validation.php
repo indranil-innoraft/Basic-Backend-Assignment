@@ -1,5 +1,22 @@
 <?php
 
+/**
+ * Validate user inputs information.
+ * 
+ * @method boolean checkUserName()
+ *   Check user inputs a correct name or not.
+ * @method boolean checkUploadedFile()
+ *   Check user upload a correct file or not.
+ * @method boolean checkUserName()
+ *   Check user inputs a correct name or not.
+ * @method boolean checkPhoneNumber()
+ *   Check user inputs a correct indian phone number or not.
+ * @method boolean isValidEmail()
+ *   Check user inputs a valid email id or not.
+ * @method boolean isValidPassword()
+ *   Check user input a correct password or not.
+ *  
+ */
 class Validation {
   
   /**

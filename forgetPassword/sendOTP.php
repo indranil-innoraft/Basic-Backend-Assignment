@@ -39,7 +39,8 @@ $mail->addAddress($_POST['email']);
 //Set email format to HTML.
 $mail->isHTML(true);
 $mail->Subject = 'Reset Password.';
-$mail->Body = $otp;
+$text = "One time password(OTP) is : ";
+$mail->Body = $text . $otp;
 
 //Send email.
 $mail->send();
