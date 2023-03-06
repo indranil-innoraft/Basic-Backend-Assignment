@@ -87,4 +87,18 @@ class db extends mysqli {
       return false;
     }
   }
+
+  /**
+   * Delete user account.
+   *
+   * @param string $email
+   * 
+   * @return void
+   * 
+   */
+
+  public function deleteAccount(string $email) {
+    $sql = "DELETE FROM userInfo where EmailAddress = '$email';";
+    $this->query($sql);
+  }
 }

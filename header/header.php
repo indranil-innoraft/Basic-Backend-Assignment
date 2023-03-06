@@ -3,9 +3,9 @@
 session_start();
 
 //Check user is login or not.
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
   header('location: ../index.php');
- }
+}
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position:sticky; top:0; ">
@@ -14,8 +14,14 @@ if(!isset($_SESSION['login'])){
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-    <li class="nav-item">
-        <a class="nav-link" href="https://github.com/indranil-innoraft/Basic-Backend-Assignment">Git Hub</a>
+      <li class="nav-item">
+        <div class="dropdown">
+          <button class="dropbtn">Profile</button>
+          <div class="dropdown-content">
+            <a href="../deleteAccount/index.php">Delete Account</a>
+            <a href="../logout/logout.php">Logout</a>
+          </div>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../home/home.php">Home</a>
@@ -42,9 +48,7 @@ if(!isset($_SESSION['login'])){
       <li class="nav-item">
         <a class="nav-link" href="../logout/logout.php">logout</a>
       </li>
-
     </ul>
-
   </div>
 
   <div class="user">
