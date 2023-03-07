@@ -8,3 +8,5 @@ else {
   $_SESSION['formErrorMsg'] = "OTP not valid.";
   header ("Location: checkOTP.php");
 }
+
+?>

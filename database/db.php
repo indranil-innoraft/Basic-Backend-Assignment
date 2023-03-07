@@ -1,6 +1,7 @@
 <?php
 /**
  * Provides the methods like insert data, data already exists.
+ * mysqli class provides the the mysql realted method to make a query to the database.
  * 
  * @method boolean pushIntoDataBase()
  *   Push a new row to the database.
@@ -11,6 +12,7 @@
  * @method boolean isValid()
  *   Check user email and and password already present in the database or not.
  */
+
 class db extends mysqli {
   /**
    * Creat a new user row in the database.
@@ -28,7 +30,7 @@ class db extends mysqli {
     if ($this->query($sql)) {
       return true;
     }
-     else {
+    else {
       return false;
     }
   }
@@ -79,7 +81,8 @@ class db extends mysqli {
 
   public function isValid(string $email, string $password) {
     $sql = "SELECT * FROM userInfo where Password = '$password' AND EmailAddress = '$email';";
-    if($this->query($sql)->num_rows != 0){
+    //Checking the number of rows in the database.
+    if($this->query($sql)->num_rows != 0) {
       return true;
     }
     else {
@@ -99,5 +102,9 @@ class db extends mysqli {
   public function deleteAccount(string $email) {
     $sql = "DELETE FROM userInfo where EmailAddress = '$email';";
     $this->query($sql);
+    
   }
+
 }
+
+?>

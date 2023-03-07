@@ -1,5 +1,6 @@
 <?php
 
+//Provides the database connection.
 require ('../database/connection.php');
 session_start();
 

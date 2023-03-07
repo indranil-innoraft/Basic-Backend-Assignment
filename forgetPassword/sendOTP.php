@@ -6,6 +6,7 @@ require '../vendor/autoload.php';
 //Provides admin details.
 require './confidential.php';
 
+//Provieds the email creation and transfer class.
 use PHPMailer\PHPMailer\PHPMailer;
 
 $email = new Email();
@@ -45,4 +46,4 @@ $mail->Body = $text . $otp;
 //Send email.
 $mail->send();
 
-
+?>

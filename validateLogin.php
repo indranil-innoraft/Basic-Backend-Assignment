@@ -25,3 +25,5 @@ if (isset($_POST['login-btn'])) {
 if (isset($_POST['register'])) {
   header('Location: ./registration/signUp.php');
 }
+
+?>

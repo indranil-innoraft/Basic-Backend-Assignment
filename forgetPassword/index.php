@@ -19,7 +19,8 @@
     </div>
       <!-- email id field -->
       <div class="form-group">
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter Register Email">
+        <input type="email" class="form-control" id="exampleInputEmail1" 
+        aria-describedby="emailHelp" name="email" placeholder="Enter Register Email">
       </div>
       <!-- Reset password button -->
       <button type="submit" name="register" class="btn btn-primary sign-up">Send the OTP</button>
