@@ -15,3 +15,5 @@ else {
   $_SESSION['formErrorMsg'] = "Password change successfully,You can login now.";
   header("Location: ../index.php");
 }
+
+?>

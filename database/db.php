@@ -22,8 +22,7 @@ class db extends mysqli {
    * 
    */
 
-  public function pushIntoDataBase(string $email, string $password)
-  {
+  public function pushIntoDataBase(string $email, string $password) {
     $sql = "insert into userInfo (EmailAddress, Password) values('$email', '$password');";
 
     if ($this->query($sql)) {

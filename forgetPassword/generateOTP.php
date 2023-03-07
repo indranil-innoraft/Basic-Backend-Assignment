@@ -14,3 +14,5 @@ else {
   $_SESSION['formErrorMsg'] = "Enter a correct user email.";
   header('location: index.php');
 }
+
+?>
